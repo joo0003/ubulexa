@@ -1,0 +1,9 @@
+notAGeolocationDeviceException = Lo siento. Burgos Plus necesita de los servicios de localización de Alexa, pero tu dispositivo no es compatible con ellos.
+geolocationPermissionsNotGrantedException = Lo siento. Burgos Plus necesita de tu permiso para acceder a los servicios de localización. Para activarlos sigue las instrucciones en la app de Alexa.
+locationServicesAccessNotEnabledException = Lo siento. Burgos Plus tiene problemas para acceder a tu localización. Asegúrate que tu dispositivo tiene activado el servicio de localización compartida en los ajustes e inténtalo de nuevo.
+locationServicesNotRunningException = Lo siento. Burgos Plus tiene problemas para acceder a tu localización. Por favor, espera unos momentos e inténtalo de nuevo.
+goodBye = Adiós.
+help = Acércate a una de las estatuas de bronce de las calles de Burgos.
+noStatusNearBy = Lo siento. Parece que no hay ninguna estatua de bronce cerca de ti. Acércate a una de las muchas estatuas de bronce que tiene Burgos e inténtalo de nuevo.
+nextToCastanera = Estas en La Castañera.
+nextToPeregrino = Estas en El Peregrino.
