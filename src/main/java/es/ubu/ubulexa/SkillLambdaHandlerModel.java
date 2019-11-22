@@ -3,7 +3,7 @@ package es.ubu.ubulexa;
 import com.amazon.ask.Skill;
 import com.amazon.ask.request.impl.BaseSkillRequest;
 import com.amazon.ask.response.SkillResponse;
-import es.ubu.ubulexa.tools.SkillBuilder;
+import es.ubu.ubulexa.config.SkillBuilder;
 import es.ubu.ubulexa.tools.s3dumpers.RequestToS3Dumper;
 import es.ubu.ubulexa.tools.s3dumpers.ResponseToS3Dumper;
 import es.ubu.ubulexa.utils.IOUtils;

@@ -4,6 +4,7 @@ public class Constants {
 
   public static final String APPLICATION_JSON_MEDIA_TYPE = "application/json";
   public static final String APPLICATION_PLAIN_TEXT_MEDIA_TYPE = "text/plain";
+  public static final String APPLICATION_HTML_MEDIA_TYPE = "text/html";
 
   public static final String CANCEL_INTENT = "AMAZON.CancelIntent";
   public static final String STOP_INTENT = "AMAZON.StopIntent";

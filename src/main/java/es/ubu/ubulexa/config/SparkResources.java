@@ -1,10 +1,12 @@
-package es.ubu.ubulexa.tools;
+package es.ubu.ubulexa.config;
 
 import static spark.Spark.exception;
 import static spark.Spark.get;
 
 import es.ubu.ubulexa.Constants;
 import es.ubu.ubulexa.controllers.HealthController;
+import es.ubu.ubulexa.controllers.WebAuthController;
+import es.ubu.ubulexa.utils.FreemarkerUtils;
 import jodd.exception.ExceptionUtil;
 import jodd.net.HttpStatus;
 import jodd.petite.meta.PetiteBean;
@@ -18,7 +20,19 @@ public class SparkResources {
 
   private static Logger LOGGER = LoggerFactory.getLogger(SparkResources.class);
 
+  private FreemarkerUtils freemarkerUtils;
   private HealthController healthController;
+  private WebAuthController webAuthController;
+
+  @PetiteInject
+  public void setFreemarkerUtils(FreemarkerUtils freemarkerUtils) {
+    this.freemarkerUtils = freemarkerUtils;
+  }
+
+  @PetiteInject
+  public void setWebAuthController(WebAuthController webAuthController) {
+    this.webAuthController = webAuthController;
+  }
 
   @PetiteInject
   public void setHealthController(HealthController healthController) {
@@ -29,6 +43,8 @@ public class SparkResources {
     defineExceptions();
 
     get("/health", (req, res) -> healthController.get(req, res));
+
+    get("/webauth", (req, res) -> webAuthController.get(req, res), freemarkerUtils.engine());
   }
 
   private void defineExceptions() {

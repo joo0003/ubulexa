@@ -1,6 +1,6 @@
 package es.ubu.ubulexa.tools;
 
-import es.ubu.ubulexa.utils.SystemUtils;
+import es.ubu.ubulexa.utils.SystemEnvUtils;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import jodd.util.StringPool;
@@ -13,18 +13,18 @@ public class SystemEnvReader {
     BUCKET_NAME
   }
 
-  private SystemUtils systemUtils;
+  private SystemEnvUtils systemEnvUtils;
 
   @PetiteInject
-  public void setSystemUtils(SystemUtils systemUtils) {
-    this.systemUtils = systemUtils;
+  public void setSystemEnvUtils(SystemEnvUtils systemEnvUtils) {
+    this.systemEnvUtils = systemEnvUtils;
   }
 
   public String skillId() {
-    return systemUtils.getEnvironmentVariable(SystemEnvKey.SKILL_ID.name(), StringPool.EMPTY);
+    return systemEnvUtils.getEnvironmentVariable(SystemEnvKey.SKILL_ID, StringPool.EMPTY);
   }
 
   public String bucketName() {
-    return systemUtils.getEnvironmentVariable(SystemEnvKey.BUCKET_NAME.name(), StringPool.EMPTY);
+    return systemEnvUtils.getEnvironmentVariable(SystemEnvKey.BUCKET_NAME, StringPool.EMPTY);
   }
 }
