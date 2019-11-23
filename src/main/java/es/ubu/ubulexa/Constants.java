@@ -19,6 +19,8 @@ public class Constants {
 
   public static final String SUBFOLDER_RAW_REQUESTS_NAME = "raw_requests";
   public static final String SUBFOLDER_RAW_RESPONSES_NAME = "raw_responses";
+  public static final String SUBFOLDER_WEB_REQUESTS_NAME = "web_requests";
+  public static final String SUBFOLDER_WEB_RESPONSES_NAME = "web_responses";
 
   //**** DICTIONARY ****
 

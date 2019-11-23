@@ -4,8 +4,7 @@ import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
 import com.amazonaws.serverless.proxy.spark.SparkLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
-import es.ubu.ubulexa.tools.s3dumpers.RequestToS3Dumper;
-import es.ubu.ubulexa.tools.s3dumpers.ResponseToS3Dumper;
+import es.ubu.ubulexa.tools.S3Dumper;
 import es.ubu.ubulexa.utils.StreamUtils;
 import es.ubu.ubulexa.utils.UuidUtils;
 import java.io.ByteArrayInputStream;
@@ -23,8 +22,7 @@ public class WebLambdaHandlerModel {
 
   private static Logger LOGGER = LoggerFactory.getLogger(WebLambdaHandlerModel.class);
 
-  private RequestToS3Dumper requestToS3Dumper;
-  private ResponseToS3Dumper responseToS3Dumper;
+  private S3Dumper s3Dumper;
   private UuidUtils uuidUtils;
   private StreamUtils streamUtils;
 
@@ -39,14 +37,8 @@ public class WebLambdaHandlerModel {
   }
 
   @PetiteInject
-  public void setRequestToS3Dumper(RequestToS3Dumper requestToS3Dumper) {
-    this.requestToS3Dumper = requestToS3Dumper;
-  }
-
-  @PetiteInject
-  public void setResponseToS3Dumper(
-      ResponseToS3Dumper responseToS3Dumper) {
-    this.responseToS3Dumper = responseToS3Dumper;
+  public void setS3Dumper(S3Dumper s3Dumper) {
+    this.s3Dumper = s3Dumper;
   }
 
   public void handleRequest(
@@ -61,7 +53,7 @@ public class WebLambdaHandlerModel {
       //****
 
       byte[] inputBytes = streamUtils.readBytes(inputStream);
-      requestToS3Dumper.dump(uuid, inputBytes);
+      s3Dumper.dump(uuid, Constants.SUBFOLDER_WEB_REQUESTS_NAME, inputBytes);
 
       //****
 
@@ -73,7 +65,7 @@ public class WebLambdaHandlerModel {
       //****
 
       byte[] outputBytes = baos.toByteArray();
-      responseToS3Dumper.dump(uuid, outputBytes);
+      s3Dumper.dump(uuid, Constants.SUBFOLDER_WEB_RESPONSES_NAME, outputBytes);
 
       //****
 

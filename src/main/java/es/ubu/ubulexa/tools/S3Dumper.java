@@ -1,9 +1,9 @@
-package es.ubu.ubulexa.tools.s3dumpers;
+package es.ubu.ubulexa.tools;
 
-import es.ubu.ubulexa.Constants;
-import es.ubu.ubulexa.tools.SystemEnvReader;
 import es.ubu.ubulexa.utils.AmazonS3Utils;
+import es.ubu.ubulexa.utils.ClockUtils;
 import es.ubu.ubulexa.utils.IOUtils;
+import java.io.IOException;
 import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
@@ -11,10 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @PetiteBean
-public class ResponseToS3Dumper extends AbstractS3Dumper {
+public class S3Dumper {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ResponseToS3Dumper.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(S3Dumper.class);
 
+  private ClockUtils clockUtils;
   private AmazonS3Utils amazonS3Utils;
   private SystemEnvReader systemEnvReader;
   private IOUtils ioUtils;
@@ -34,13 +35,27 @@ public class ResponseToS3Dumper extends AbstractS3Dumper {
     this.amazonS3Utils = amazonS3Utils;
   }
 
-  public void dump(String uuid, byte[] bytes) {
+  @PetiteInject
+  public void setClockUtils(ClockUtils clockUtils) {
+    this.clockUtils = clockUtils;
+  }
+
+  public void dump(String uuid, String keyPrefix, byte[] bytes) {
     try {
       String filename = createFilename(uuid);
-      String key = Constants.SUBFOLDER_RAW_RESPONSES_NAME + "/" + filename;
-      dumpToS3(key, bytes);
+      String key = keyPrefix + "/" + filename;
+      dump(key, bytes);
     } catch (Exception e) {
       LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
     }
+  }
+
+  private String createFilename(String uuid) {
+    return clockUtils.clock().millis() + "_" + uuid;
+  }
+
+  private void dump(String key, byte[] bytes) throws IOException {
+    String content = ioUtils.toString(bytes);
+    amazonS3Utils.putObject(systemEnvReader.bucketName(), key, content);
   }
 }

@@ -8,6 +8,7 @@ public class PetiteInitializer {
   public static PetiteContainer init() {
     PetiteContainer petiteContainer = new PetiteContainer();
     petiteContainer.config().setUseFullTypeNames(true);
+    petiteContainer.addSelf();
 
     AutomagicPetiteConfigurator configurator = new AutomagicPetiteConfigurator(petiteContainer);
     configurator.configure();

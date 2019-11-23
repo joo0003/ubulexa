@@ -1,0 +1,33 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "ubulexa",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "ExtraIntent",
+          "slots": [],
+          "samples": [
+            "extra"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}

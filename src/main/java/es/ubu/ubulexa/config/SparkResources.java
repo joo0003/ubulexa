@@ -2,6 +2,7 @@ package es.ubu.ubulexa.config;
 
 import static spark.Spark.exception;
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 import es.ubu.ubulexa.Constants;
 import es.ubu.ubulexa.controllers.HealthController;
@@ -45,6 +46,8 @@ public class SparkResources {
     get("/health", (req, res) -> healthController.get(req, res));
 
     get("/webauth", (req, res) -> webAuthController.get(req, res), freemarkerUtils.engine());
+
+    post("/webauth", (req, res) -> webAuthController.post(req, res), freemarkerUtils.engine());
   }
 
   private void defineExceptions() {
