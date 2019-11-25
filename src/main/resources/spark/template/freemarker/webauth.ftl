@@ -18,11 +18,19 @@
         <h3 class="title has-text-black">Bienvenido</h3>
         <hr class="login-hr">
         <div class="box">
+
+            <#if error??>
+              <div class="notification is-danger">
+                Datos erróneos. Por favor, inténtelo otra vez.
+              </div>
+            </#if>
+
           <form action="webauth" method="post">
             <div class="field">
               <div class="control">
                 <label>
-                  <input class="input is-large" name="username" type="text" placeholder="Nombre de Usuario">
+                  <input class="input is-large" name="username" type="text"
+                         placeholder="Nombre de Usuario">
                 </label>
               </div>
             </div>
@@ -30,15 +38,26 @@
             <div class="field">
               <div class="control">
                 <label>
-                  <input class="input is-large" name="password" type="password" placeholder="Contraseña">
+                  <input class="input is-large" name="password" type="password"
+                         placeholder="Contraseña">
                 </label>
               </div>
             </div>
+
+              <#if state??>
+                <input name="state" type="hidden" value="${state}">
+              </#if>
+
+              <#if redirectUri??>
+                <input name="redirectUri" type="hidden" value="${redirectUri}">
+              </#if>
 
             <button class="button is-block is-info is-large is-fullwidth">
               Acceder
             </button>
           </form>
+
+
         </div>
       </div>
     </div>

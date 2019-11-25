@@ -48,6 +48,8 @@ public class SparkResources {
     get("/webauth", (req, res) -> webAuthController.get(req, res), freemarkerUtils.engine());
 
     post("/webauth", (req, res) -> webAuthController.post(req, res), freemarkerUtils.engine());
+
+    post("/webauth/token", (req, res) -> webAuthController.postToken(req, res));
   }
 
   private void defineExceptions() {
