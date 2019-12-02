@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UBUlexa - Account Linking</title>
+  <title>UBUlexa - Conecta tu cuenta</title>
 
   <style type="text/css"><#include "css/bulma.css"></style>
 </head>
@@ -17,11 +17,12 @@
       <div class="column is-4 is-offset-4">
         <h3 class="title has-text-black">Bienvenido</h3>
         <hr class="login-hr">
+        <p class="subtitle has-text-black">Por favor, introduce tus credenciales como miembro de la UBU.</p>
         <div class="box">
 
             <#if error??>
               <div class="notification is-danger">
-                Datos erróneos. Por favor, inténtelo otra vez.
+                Datos err&oacute;neos. Por favor, int&eacute;ntelo otra vez.
               </div>
             </#if>
 
@@ -39,7 +40,7 @@
               <div class="control">
                 <label>
                   <input class="input is-large" name="password" type="password"
-                         placeholder="Contraseña">
+                         placeholder="Contrase&ntilde;a">
                 </label>
               </div>
             </div>

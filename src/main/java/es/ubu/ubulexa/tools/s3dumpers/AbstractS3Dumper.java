@@ -1,5 +1,6 @@
-package es.ubu.ubulexa.tools;
+package es.ubu.ubulexa.tools.s3dumpers;
 
+import es.ubu.ubulexa.tools.SystemEnvReader;
 import es.ubu.ubulexa.utils.AmazonS3Utils;
 import es.ubu.ubulexa.utils.ClockUtils;
 import es.ubu.ubulexa.utils.IOUtils;
@@ -11,9 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @PetiteBean
-public class S3Dumper {
+public abstract class AbstractS3Dumper {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(S3Dumper.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractS3Dumper.class);
 
   private ClockUtils clockUtils;
   private AmazonS3Utils amazonS3Utils;
@@ -50,12 +51,12 @@ public class S3Dumper {
     }
   }
 
-  private String createFilename(String uuid) {
-    return clockUtils.clock().millis() + "_" + uuid;
-  }
-
-  private void dump(String key, byte[] bytes) throws IOException {
+  public void dump(String key, byte[] bytes) throws IOException {
     String content = ioUtils.toString(bytes);
     amazonS3Utils.putObject(systemEnvReader.bucketName(), key, content);
+  }
+
+  private String createFilename(String uuid) {
+    return clockUtils.clock().millis() + "_" + uuid;
   }
 }

@@ -4,7 +4,8 @@ import com.amazon.ask.Skill;
 import com.amazon.ask.request.impl.BaseSkillRequest;
 import com.amazon.ask.response.SkillResponse;
 import es.ubu.ubulexa.config.SkillBuilder;
-import es.ubu.ubulexa.tools.S3Dumper;
+import es.ubu.ubulexa.tools.s3dumpers.SkillRequestS3Dumper;
+import es.ubu.ubulexa.tools.s3dumpers.SkillResponseS3Dumper;
 import es.ubu.ubulexa.utils.IOUtils;
 import es.ubu.ubulexa.utils.UuidUtils;
 import java.io.InputStream;
@@ -23,11 +24,19 @@ public class SkillLambdaHandlerModel {
   private UuidUtils uuidUtils;
   private SkillBuilder skillBuilder;
   private IOUtils ioUtils;
-  private S3Dumper s3Dumper;
+  private SkillRequestS3Dumper skillRequestS3Dumper;
+  private SkillResponseS3Dumper skillResponseS3Dumper;
 
   @PetiteInject
-  public void setS3Dumper(S3Dumper s3Dumper) {
-    this.s3Dumper = s3Dumper;
+  public void setSkillResponseS3Dumper(
+      SkillResponseS3Dumper skillResponseS3Dumper) {
+    this.skillResponseS3Dumper = skillResponseS3Dumper;
+  }
+
+  @PetiteInject
+  public void setSkillRequestS3Dumper(
+      SkillRequestS3Dumper skillRequestS3Dumper) {
+    this.skillRequestS3Dumper = skillRequestS3Dumper;
   }
 
   @PetiteInject
@@ -51,13 +60,13 @@ public class SkillLambdaHandlerModel {
 
       byte[] inputBytes = ioUtils.toByteArray(inputStream);
 
-      s3Dumper.dump(uuid, Constants.SUBFOLDER_RAW_REQUESTS_NAME, inputBytes);
+      skillRequestS3Dumper.dump(uuid, inputBytes);
 
       Skill skill = skillBuilder.build();
       SkillResponse response = skill.execute(new BaseSkillRequest(inputBytes));
 
       if (null != response && response.isPresent()) {
-        s3Dumper.dump(uuid, Constants.SUBFOLDER_RAW_RESPONSES_NAME, response.getRawResponse());
+        skillResponseS3Dumper.dump(uuid, response.getRawResponse());
         ioUtils.write(response.getRawResponse(), outputStream);
       }
     } catch (Exception e) {

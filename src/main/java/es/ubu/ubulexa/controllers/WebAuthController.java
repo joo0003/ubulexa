@@ -3,12 +3,18 @@ package es.ubu.ubulexa.controllers;
 import es.ubu.ubulexa.Constants;
 import es.ubu.ubulexa.tools.AccessTokenCreator;
 import es.ubu.ubulexa.tools.MoodleTokenExchanger;
+import es.ubu.ubulexa.tools.SystemEnvReader;
+import es.ubu.ubulexa.utils.AmazonS3Utils;
+import es.ubu.ubulexa.utils.Base64Utils;
 import es.ubu.ubulexa.utils.JsonUtils;
 import java.util.HashMap;
 import java.util.Map;
+import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -16,9 +22,30 @@ import spark.Response;
 @PetiteBean
 public class WebAuthController {
 
+  private static final Logger LOGGER = LoggerFactory
+      .getLogger(WebAuthController.class);
+
   private MoodleTokenExchanger moodleTokenExchanger;
   private AccessTokenCreator accessTokenCreator;
   private JsonUtils jsonUtils;
+  private AmazonS3Utils amazonS3Utils;
+  private SystemEnvReader systemEnvReader;
+  private Base64Utils base64Utils;
+
+  @PetiteInject
+  public void setBase64Utils(Base64Utils base64Utils) {
+    this.base64Utils = base64Utils;
+  }
+
+  @PetiteInject
+  public void setSystemEnvReader(SystemEnvReader systemEnvReader) {
+    this.systemEnvReader = systemEnvReader;
+  }
+
+  @PetiteInject
+  public void setAmazonS3Utils(AmazonS3Utils amazonS3Utils) {
+    this.amazonS3Utils = amazonS3Utils;
+  }
 
   @PetiteInject
   public void setJsonUtils(JsonUtils jsonUtils) {
@@ -66,14 +93,31 @@ public class WebAuthController {
       return new ModelAndView(attributes, "webauth.ftl");
     }
 
-    String jwt = accessTokenCreator.create(username, token);
+    String jwt = accessTokenCreator.create(username);
 
     redirectUri += "?state=" + state;
     redirectUri += "&code=" + jwt;
 
+    dumpUserDataToS3(username, token);
+
     res.type(Constants.APPLICATION_JSON_MEDIA_TYPE);
     res.redirect(redirectUri);
     return null;
+  }
+
+  private void dumpUserDataToS3(String username, String token) {
+    try {
+      String filename = base64Utils.encode(username);
+
+      String key = Constants.SUBFOLDER_USER_DATA_NAME + "/" + filename;
+      amazonS3Utils.putObject(
+          systemEnvReader.bucketName(),
+          key,
+          token
+      );
+    } catch (Exception e) {
+      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
+    }
   }
 
   public String postToken(Request req, Response res) {
