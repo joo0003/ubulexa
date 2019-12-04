@@ -10,10 +10,12 @@ import jodd.props.Props;
 @PetiteBean
 public class NotAGeolocationDeviceExceptionHandlerModel extends AbstractExceptionHandlerModel {
 
+  private static final String SPEECH_TEXT_KEY = "NotAGeolocationDeviceExceptionHandlerModel.speechtext";
+
   public Optional<Response> handle(HandlerInput handlerInput, Throwable throwable) {
     Props dictionary = dictionaryPropsResolver.resolve(handlerInput);
 
-    String speechText = dictionary.getValue(Constants.DICT_KEY_GOODBYE);
+    String speechText = dictionary.getValue(SPEECH_TEXT_KEY);
     return handlerInput.getResponseBuilder()
         .withSpeech(speechText)
         .build();

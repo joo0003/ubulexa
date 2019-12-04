@@ -7,9 +7,9 @@ import es.ubu.ubulexa.tools.SystemEnvReader;
 import es.ubu.ubulexa.utils.AmazonS3Utils;
 import es.ubu.ubulexa.utils.Base64Utils;
 import es.ubu.ubulexa.utils.JsonUtils;
+import es.ubu.ubulexa.utils.UuidUtils;
 import java.util.HashMap;
 import java.util.Map;
-import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +31,12 @@ public class WebAuthController {
   private AmazonS3Utils amazonS3Utils;
   private SystemEnvReader systemEnvReader;
   private Base64Utils base64Utils;
+  private UuidUtils uuidUtils;
+
+  @PetiteInject
+  public void setUuidUtils(UuidUtils uuidUtils) {
+    this.uuidUtils = uuidUtils;
+  }
 
   @PetiteInject
   public void setBase64Utils(Base64Utils base64Utils) {
@@ -93,31 +99,16 @@ public class WebAuthController {
       return new ModelAndView(attributes, "webauth.ftl");
     }
 
-    String jwt = accessTokenCreator.create(username);
+    String userId = uuidUtils.generate();
+
+    String jwt = accessTokenCreator.create(userId, username, token);
 
     redirectUri += "?state=" + state;
     redirectUri += "&code=" + jwt;
 
-    dumpUserDataToS3(username, token);
-
     res.type(Constants.APPLICATION_JSON_MEDIA_TYPE);
     res.redirect(redirectUri);
     return null;
-  }
-
-  private void dumpUserDataToS3(String username, String token) {
-    try {
-      String filename = base64Utils.encode(username);
-
-      String key = Constants.SUBFOLDER_USER_DATA_NAME + "/" + filename;
-      amazonS3Utils.putObject(
-          systemEnvReader.bucketName(),
-          key,
-          token
-      );
-    } catch (Exception e) {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
-    }
   }
 
   public String postToken(Request req, Response res) {

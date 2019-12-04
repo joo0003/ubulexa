@@ -4,7 +4,6 @@ import es.ubu.ubulexa.tools.SystemEnvReader;
 import es.ubu.ubulexa.utils.AmazonS3Utils;
 import es.ubu.ubulexa.utils.ClockUtils;
 import es.ubu.ubulexa.utils.IOUtils;
-import java.io.IOException;
 import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
@@ -45,15 +44,10 @@ public abstract class AbstractS3Dumper {
     try {
       String filename = createFilename(uuid);
       String key = keyPrefix + "/" + filename;
-      dump(key, bytes);
+      amazonS3Utils.putObject(systemEnvReader.bucketName(), key, bytes);
     } catch (Exception e) {
       LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
     }
-  }
-
-  public void dump(String key, byte[] bytes) throws IOException {
-    String content = ioUtils.toString(bytes);
-    amazonS3Utils.putObject(systemEnvReader.bucketName(), key, content);
   }
 
   private String createFilename(String uuid) {

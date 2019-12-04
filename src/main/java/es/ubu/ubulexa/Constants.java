@@ -22,12 +22,4 @@ public class Constants {
   public static final String SUBFOLDER_USER_DATA_NAME = "user_data";
   public static final String SUBFOLDER_WEB_REQUESTS_NAME = "web_requests";
   public static final String SUBFOLDER_WEB_RESPONSES_NAME = "web_responses";
-
-  //**** DICTIONARY ****
-
-  public static final String DICT_KEY_NO_STATUES_NEAR_BY = "noStatusNearBy";
-  public static final String DICT_KEY_GOODBYE = "goodBye";
-  public static final String DICT_KEY_HELP = "help";
-
-  //**** END DICTIONARY ****
 }

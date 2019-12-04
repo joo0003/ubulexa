@@ -6,6 +6,7 @@ import static spark.Spark.post;
 
 import es.ubu.ubulexa.Constants;
 import es.ubu.ubulexa.controllers.HealthController;
+import es.ubu.ubulexa.controllers.PrivacyPolicyController;
 import es.ubu.ubulexa.controllers.WebAuthController;
 import es.ubu.ubulexa.utils.FreemarkerUtils;
 import jodd.exception.ExceptionUtil;
@@ -24,6 +25,13 @@ public class SparkResources {
   private FreemarkerUtils freemarkerUtils;
   private HealthController healthController;
   private WebAuthController webAuthController;
+  private PrivacyPolicyController privacyPolicyController;
+
+  @PetiteInject
+  public void setPrivacyPolicyController(
+      PrivacyPolicyController privacyPolicyController) {
+    this.privacyPolicyController = privacyPolicyController;
+  }
 
   @PetiteInject
   public void setFreemarkerUtils(FreemarkerUtils freemarkerUtils) {
@@ -50,6 +58,9 @@ public class SparkResources {
     post("/webauth", (req, res) -> webAuthController.post(req, res), freemarkerUtils.engine());
 
     post("/webauth/token", (req, res) -> webAuthController.postToken(req, res));
+
+    get("/privacypolicy", (req, res) -> privacyPolicyController.get(req, res),
+        freemarkerUtils.engine());
   }
 
   private void defineExceptions() {

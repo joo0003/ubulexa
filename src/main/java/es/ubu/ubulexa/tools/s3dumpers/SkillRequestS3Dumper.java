@@ -7,6 +7,6 @@ import jodd.petite.meta.PetiteBean;
 public class SkillRequestS3Dumper extends AbstractS3Dumper {
 
   public void dump(String uuid, byte[] bytes) {
-    super.dump(uuid, Constants.SUBFOLDER_RAW_REQUESTS_NAME, bytes);
+    dump(uuid, Constants.SUBFOLDER_RAW_REQUESTS_NAME, bytes);
   }
 }

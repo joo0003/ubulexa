@@ -17,9 +17,10 @@
       <div class="column is-4 is-offset-4">
         <h3 class="title has-text-black">Bienvenido</h3>
         <hr class="login-hr">
-        <p class="subtitle has-text-black">Por favor, introduce tus credenciales como miembro de la UBU.</p>
-        <div class="box">
+        <p class="subtitle has-text-black">Por favor, introduce tus credenciales como miembro de la
+          UBU.</p>
 
+        <div class="box">
             <#if error??>
               <div class="notification is-danger">
                 Datos err&oacute;neos. Por favor, int&eacute;ntelo otra vez.
@@ -58,7 +59,15 @@
             </button>
           </form>
 
+        </div>
 
+        <div class="buttons is-centered">
+          <a class="button is-text" href="privacypolicy" target="_blank">
+            Pol&iacute;tica de Privacidad
+          </a>
+          <a class="button is-text" href="termsofuse" target="_blank">
+            T&eacute;rminos de Uso
+          </a>
         </div>
       </div>
     </div>

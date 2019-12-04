@@ -30,11 +30,13 @@ public class AccessTokenCreator {
     this.systemEnvReader = systemEnvReader;
   }
 
-  public String create(String username) {
+  public String create(String userId, String username, String token) {
     Algorithm algorithm = jwtUtils.algorithm(systemEnvReader.jwtSecret());
 
     Builder jwtBuilder = jwtUtils.builder();
-    jwtBuilder.withSubject(username);
+    jwtBuilder.withSubject(userId);
+    jwtBuilder.withClaim("username", username);
+    jwtBuilder.withClaim("token", token);
     jwtBuilder.withIssuedAt(Date.valueOf(localDateTimeUtils.nowUtc().toLocalDate()));
     return jwtBuilder.sign(algorithm);
   }
