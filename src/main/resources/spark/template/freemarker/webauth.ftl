@@ -65,9 +65,6 @@
           <a class="button is-text" href="privacypolicy" target="_blank">
             Pol&iacute;tica de Privacidad
           </a>
-          <a class="button is-text" href="termsofuse" target="_blank">
-            T&eacute;rminos de Uso
-          </a>
         </div>
       </div>
     </div>
