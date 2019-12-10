@@ -20,6 +20,10 @@ public class AmazonS3Utils {
     this.amazonS3 = amazonS3;
   }
 
+  public boolean doesObjectExist(String bucket, String key) {
+    return amazonS3.doesObjectExist(bucket, key);
+  }
+
   public void putObject(String bucket, String key, String content) {
     amazonS3.putObject(bucket, key, content);
   }

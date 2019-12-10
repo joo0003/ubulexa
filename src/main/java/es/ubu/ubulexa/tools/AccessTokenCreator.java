@@ -2,6 +2,7 @@ package es.ubu.ubulexa.tools;
 
 import com.auth0.jwt.JWTCreator.Builder;
 import com.auth0.jwt.algorithms.Algorithm;
+import es.ubu.ubulexa.Constants;
 import es.ubu.ubulexa.utils.JwtUtils;
 import es.ubu.ubulexa.utils.LocalDateTimeUtils;
 import java.sql.Date;
@@ -35,8 +36,8 @@ public class AccessTokenCreator {
 
     Builder jwtBuilder = jwtUtils.builder();
     jwtBuilder.withSubject(userId);
-    jwtBuilder.withClaim("username", username);
-    jwtBuilder.withClaim("token", token);
+    jwtBuilder.withClaim(Constants.JWT_USERNAME_CLAIM, username);
+    jwtBuilder.withClaim(Constants.JWT_TOKEN_CLAIM, token);
     jwtBuilder.withIssuedAt(Date.valueOf(localDateTimeUtils.nowUtc().toLocalDate()));
     return jwtBuilder.sign(algorithm);
   }

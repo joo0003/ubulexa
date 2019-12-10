@@ -2,6 +2,7 @@ package es.ubu.ubulexa.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import jodd.petite.meta.PetiteBean;
 
@@ -14,5 +15,9 @@ public class JwtUtils {
 
   public JWTCreator.Builder builder() {
     return JWT.create();
+  }
+
+  public JWTVerifier verifier(Algorithm algorithm) {
+    return JWT.require(algorithm).build();
   }
 }

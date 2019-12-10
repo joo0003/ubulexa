@@ -1,9 +1,0 @@
-notAGeolocationDeviceException = Sorry. Burgos Plus uses Alexa location services but your device seems not compatible with them.
-geolocationPermissionsNotGrantedException = Sorry. Burgos Plus needs permissions to access location services. To turn on location sharing, please follow the instructions given on your Alexa app.
-locationServicesAccessNotEnabledException = Sorry. Burgos Plus is having trouble accessing your location. Please go to your device's settings to turn on location sharing, and try again.
-locationServicesNotRunningException = Sorry. Burgos Plus is having trouble accessing your location. Please wait a moment, and try again.
-goodBye = Good Bye.
-help = Get close to one of the many bronze statues located on the streets of Burgos.
-noStatusNearBy = Sorry. It seems there is no bronze statues next to you. The closest statue to you is La Castañera. Get close to it and try again.
-nextToCastanera = You are next to La Castañera.
-nextToPeregrino = You are next to El Peregrino.

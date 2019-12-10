@@ -2,23 +2,23 @@ package es.ubu.ubulexa.requestinterceptors;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
-import es.ubu.ubulexa.requestinterceptors.steps.GeolocationRequestInterceptorStep;
+import es.ubu.ubulexa.requestinterceptors.steps.UserEventsRequestInterceptorStep;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 
 @PetiteBean
 public class MainRequestInterceptor implements RequestInterceptor {
 
-  private GeolocationRequestInterceptorStep geolocationRequestInterceptorStep;
+  private UserEventsRequestInterceptorStep userEventsRequestInterceptorStep;
 
   @PetiteInject
-  public void setGeolocationRequestInterceptorStep(
-      GeolocationRequestInterceptorStep geolocationRequestInterceptorStep) {
-    this.geolocationRequestInterceptorStep = geolocationRequestInterceptorStep;
+  public void setUserEventsRequestInterceptorStep(
+      UserEventsRequestInterceptorStep userEventsRequestInterceptorStep) {
+    this.userEventsRequestInterceptorStep = userEventsRequestInterceptorStep;
   }
 
   @Override
   public void process(HandlerInput handlerInput) {
-    //geolocationRequestInterceptorStep.run(handlerInput);
+    userEventsRequestInterceptorStep.run(handlerInput);
   }
 }

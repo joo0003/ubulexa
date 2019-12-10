@@ -7,7 +7,7 @@ import com.amazon.ask.model.Response;
 import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
-import es.ubu.ubulexa.exceptionhandlers.NotAGeolocationDeviceExceptionHandler;
+import es.ubu.ubulexa.exceptionhandlers.NoFirstTimeUserEventFoundExceptionHandler;
 import es.ubu.ubulexa.requesthandlers.CancelIntentHandler;
 import es.ubu.ubulexa.requesthandlers.HelpIntentHandler;
 import es.ubu.ubulexa.requesthandlers.LaunchRequestHandler;
@@ -57,7 +57,7 @@ public class SkillBuilder {
 
   private List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers() {
     List<GenericExceptionHandler<HandlerInput, Optional<Response>>> l = new ArrayList<>();
-    l.add(petiteContainer.getBean(NotAGeolocationDeviceExceptionHandler.class));
+    l.add(petiteContainer.getBean(NoFirstTimeUserEventFoundExceptionHandler.class));
     return l;
   }
 

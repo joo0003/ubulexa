@@ -17,9 +17,12 @@ public class Constants {
   public static final String EN_PROPS_FILENAME = "i18n/en.props";
   public static final String ES_PROPS_FILENAME = "i18n/es.props";
 
+  public static final String JWT_USERNAME_CLAIM = "username";
+  public static final String JWT_TOKEN_CLAIM = "token";
+
   public static final String SUBFOLDER_RAW_REQUESTS_NAME = "raw_requests";
   public static final String SUBFOLDER_RAW_RESPONSES_NAME = "raw_responses";
-  public static final String SUBFOLDER_USER_DATA_NAME = "user_data";
+  public static final String SUBFOLDER_FIRST_TIME_USER_EVENTS_NAME = "first_time_user_events";
   public static final String SUBFOLDER_WEB_REQUESTS_NAME = "web_requests";
   public static final String SUBFOLDER_WEB_RESPONSES_NAME = "web_responses";
 }
