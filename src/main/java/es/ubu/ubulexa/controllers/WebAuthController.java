@@ -4,9 +4,10 @@ import es.ubu.ubulexa.Constants;
 import es.ubu.ubulexa.tools.AccessTokenCreator;
 import es.ubu.ubulexa.tools.MoodleTokenExchanger;
 import es.ubu.ubulexa.tools.SystemEnvReader;
-import es.ubu.ubulexa.utils.AmazonS3Utils;
+import es.ubu.ubulexa.tools.ThreefishEncrypter;
 import es.ubu.ubulexa.utils.Base64Utils;
 import es.ubu.ubulexa.utils.JsonUtils;
+import es.ubu.ubulexa.utils.UrlUtils;
 import es.ubu.ubulexa.utils.UuidUtils;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,17 +26,23 @@ public class WebAuthController {
   private static final Logger LOGGER = LoggerFactory
       .getLogger(WebAuthController.class);
 
+  private UrlUtils urlUtils;
+  private Base64Utils base64Utils;
   private MoodleTokenExchanger moodleTokenExchanger;
   private AccessTokenCreator accessTokenCreator;
   private JsonUtils jsonUtils;
-  private AmazonS3Utils amazonS3Utils;
   private SystemEnvReader systemEnvReader;
-  private Base64Utils base64Utils;
+  private ThreefishEncrypter threefishEncrypter;
   private UuidUtils uuidUtils;
 
   @PetiteInject
-  public void setUuidUtils(UuidUtils uuidUtils) {
-    this.uuidUtils = uuidUtils;
+  public void setUrlUtils(UrlUtils urlUtils) {
+    this.urlUtils = urlUtils;
+  }
+
+  @PetiteInject
+  public void setThreefishEncrypter(ThreefishEncrypter threefishEncrypter) {
+    this.threefishEncrypter = threefishEncrypter;
   }
 
   @PetiteInject
@@ -44,13 +51,13 @@ public class WebAuthController {
   }
 
   @PetiteInject
-  public void setSystemEnvReader(SystemEnvReader systemEnvReader) {
-    this.systemEnvReader = systemEnvReader;
+  public void setUuidUtils(UuidUtils uuidUtils) {
+    this.uuidUtils = uuidUtils;
   }
 
   @PetiteInject
-  public void setAmazonS3Utils(AmazonS3Utils amazonS3Utils) {
-    this.amazonS3Utils = amazonS3Utils;
+  public void setSystemEnvReader(SystemEnvReader systemEnvReader) {
+    this.systemEnvReader = systemEnvReader;
   }
 
   @PetiteInject
@@ -103,8 +110,12 @@ public class WebAuthController {
 
     String jwt = accessTokenCreator.create(userId, username, token);
 
+    byte[] encryptedJwt = threefishEncrypter.encrypt(systemEnvReader.threefishSecret(), jwt);
+
+    String code = urlUtils.encodeQueryParam(base64Utils.encode(encryptedJwt));
+
     redirectUri += "?state=" + state;
-    redirectUri += "&code=" + jwt;
+    redirectUri += "&code=" + code;
 
     res.type(Constants.APPLICATION_JSON_MEDIA_TYPE);
     res.redirect(redirectUri);

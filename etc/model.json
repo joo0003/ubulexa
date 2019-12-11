@@ -20,10 +20,18 @@
           "samples": []
         },
         {
-          "name": "ExtraIntent",
+          "name": "VoiceSettingIntent",
           "slots": [],
           "samples": [
-            "extra"
+            "Cambiar voz",
+            "Cambiar la voz",
+            "Cambiar el tono de voz",
+            "Elegir voz",
+            "Elegir nueva voz",
+            "Elegir una voz nueva",
+            "Elegir el tono de voz",
+            "Elegir nuevo tono de voz",
+            "Elegir un tono de voz nuevo"
           ]
         }
       ],

@@ -14,6 +14,7 @@ import es.ubu.ubulexa.requesthandlers.LaunchRequestHandler;
 import es.ubu.ubulexa.requesthandlers.NavigateHomeIntentHandler;
 import es.ubu.ubulexa.requesthandlers.SessionEndedRequestHandler;
 import es.ubu.ubulexa.requesthandlers.StopIntentHandler;
+import es.ubu.ubulexa.requesthandlers.VoiceSettingIntentHandler;
 import es.ubu.ubulexa.requestinterceptors.MainRequestInterceptor;
 import es.ubu.ubulexa.tools.SystemEnvReader;
 import es.ubu.ubulexa.utils.SkillsUtils;
@@ -75,6 +76,7 @@ public class SkillBuilder {
     l.add(petiteContainer.getBean(CancelIntentHandler.class));
     l.add(petiteContainer.getBean(StopIntentHandler.class));
     l.add(petiteContainer.getBean(NavigateHomeIntentHandler.class));
+    l.add(petiteContainer.getBean(VoiceSettingIntentHandler.class));
     return l;
   }
 }

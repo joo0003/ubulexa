@@ -7,6 +7,14 @@ import jodd.petite.meta.PetiteBean;
 public class Base64Utils {
 
   public String encode(String str) {
-    return Base64.getEncoder().encodeToString(str.getBytes());
+    return encode(str.getBytes());
+  }
+
+  public String encode(byte[] bytes) {
+    return Base64.getEncoder().encodeToString(bytes);
+  }
+
+  public byte[] decode(String str) {
+    return Base64.getDecoder().decode(str);
   }
 }

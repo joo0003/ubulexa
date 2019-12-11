@@ -12,7 +12,8 @@ public class SystemEnvReader {
     SKILL_ID,
     BUCKET_NAME,
     MOODLE_HOST_URL,
-    JWT_SECRET
+    JWT_SECRET,
+    THREEFISH_SECRET
   }
 
   private SystemEnvUtils systemEnvUtils;
@@ -20,6 +21,10 @@ public class SystemEnvReader {
   @PetiteInject
   public void setSystemEnvUtils(SystemEnvUtils systemEnvUtils) {
     this.systemEnvUtils = systemEnvUtils;
+  }
+
+  public String threefishSecret() {
+    return systemEnvUtils.getEnvironmentVariable(SystemEnvKey.THREEFISH_SECRET, StringPool.EMPTY);
   }
 
   public String jwtSecret() {

@@ -15,6 +15,7 @@ public class LaunchRequestHandlerModel extends AbstractRequestHandlerModel {
     String speechText = getSpeechText(handlerInput);
     return handlerInput.getResponseBuilder()
         .withSpeech(speechText)
+        .withShouldEndSession(false)
         .build();
   }
 

@@ -10,6 +10,7 @@ public class Constants {
   public static final String STOP_INTENT = "AMAZON.StopIntent";
   public static final String HELP_INTENT = "AMAZON.HelpIntent";
   public static final String NAVIGATE_HOME_INTENT = "AMAZON.NavigateHomeIntent";
+  public static final String VOICE_SETTING_INTENT = "VoiceSettingIntent";
 
   public static final String ES_ES_LOCALE_CODE = "es-ES";
   public static final String EN_US_LOCALE_CODE = "en-US";

@@ -2,5 +2,6 @@ LaunchRequestHandlerModel.speechtext = Bienvenido a UBUlexa.
 CancelIntentHandlerModel.speechtext = Adiós.
 StopIntentHandlerModel.speechtext = Adiós.
 HelpIntentHandlerModel.speechtext = Puedes decir calendario.
+VoiceSettingIntentHandlerModel.speechtext = Muy bien.
 
 NoFirstTimeUserEventFoundExceptionHandlerModel.speechtext = ¡Toma morena!.
