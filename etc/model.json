@@ -20,15 +20,15 @@
           "samples": []
         },
         {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
           "name": "CalendarIntent",
           "slots": [],
           "samples": [
             "Calendario"
           ]
-        },
-        {
-          "name": "AMAZON.FallbackIntent",
-          "samples": []
         }
       ],
       "types": []

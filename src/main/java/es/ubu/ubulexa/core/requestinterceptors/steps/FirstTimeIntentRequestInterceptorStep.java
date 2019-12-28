@@ -3,7 +3,7 @@ package es.ubu.ubulexa.core.requestinterceptors.steps;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.daos.FirstTimeUserEventDao;
-import es.ubu.ubulexa.core.tools.sessionattributesetters.sessionattributegetters.FirstTimeSessionAttributeSetter;
+import es.ubu.ubulexa.core.tools.sessionattributes.FirstTimeSessionAttributeSetter;
 import es.ubu.ubulexa.core.utils.AmazonS3Utils;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;

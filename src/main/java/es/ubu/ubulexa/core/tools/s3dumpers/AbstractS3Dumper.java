@@ -35,15 +35,11 @@ public abstract class AbstractS3Dumper {
 
   public void dump(String uuid, String keyPrefix, byte[] bytes) {
     try {
-      String filename = createFilename(uuid);
+      String filename = clockUtils.clock().millis() + "_" + uuid;
       String key = keyPrefix + "/" + filename;
       amazonS3Utils.putObject(appConfig.bucketName(), key, bytes);
     } catch (Exception e) {
       LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
     }
-  }
-
-  private String createFilename(String uuid) {
-    return clockUtils.clock().millis() + "_" + uuid;
   }
 }

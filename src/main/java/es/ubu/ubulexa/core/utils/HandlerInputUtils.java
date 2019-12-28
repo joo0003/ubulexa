@@ -4,6 +4,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.response.ResponseBuilder;
+import java.util.function.Predicate;
 import jodd.petite.meta.PetiteBean;
 
 @PetiteBean
@@ -19,5 +20,9 @@ public class HandlerInputUtils {
 
   public ResponseBuilder getResponseBuilder(HandlerInput handlerInput) {
     return handlerInput.getResponseBuilder();
+  }
+
+  public boolean matches(HandlerInput handlerInput, Predicate<HandlerInput> predicate) {
+    return handlerInput.matches(predicate);
   }
 }

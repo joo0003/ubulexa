@@ -1,5 +1,13 @@
 package es.ubu.ubulexa.core.tools;
 
+import static es.ubu.ubulexa.core.Constants.BUCKET_NAME_KEY;
+import static es.ubu.ubulexa.core.Constants.CONFIG_PROPS_FILENAME;
+import static es.ubu.ubulexa.core.Constants.JWT_SECRET_KEY;
+import static es.ubu.ubulexa.core.Constants.MOODLE_COURSE_ID_KEY;
+import static es.ubu.ubulexa.core.Constants.MOODLE_HOST_URL_KEY;
+import static es.ubu.ubulexa.core.Constants.SKILL_ID_KEY;
+import static es.ubu.ubulexa.core.Constants.THREEFISH_SECRET_KEY;
+
 import es.ubu.ubulexa.core.utils.ClassLoaderUtils;
 import es.ubu.ubulexa.core.utils.PropsUtils;
 import java.io.InputStream;
@@ -15,14 +23,6 @@ import org.slf4j.LoggerFactory;
 public class ConfigPropsReader {
 
   private static Logger LOGGER = LoggerFactory.getLogger(ConfigPropsReader.class);
-
-  private static final String CONFIG_PROPS_FILENAME = "config.props";
-
-  private static final String BUCKET_NAME_KEY = "bucketName";
-  private static final String THREEFISH_SECRET_KEY = "threefishSecret";
-  private static final String MOODLE_HOST_URL_KEY = "moodleHostUrl";
-  private static final String JWT_SECRET_KEY = "jwtSecret";
-  private static final String SKILL_ID_KEY = "skillId";
 
   private static Props PROPS;
 
@@ -48,8 +48,12 @@ public class ConfigPropsReader {
       return PROPS;
     } catch (Exception e) {
       LOGGER.error(ExceptionUtils.getStackTrace(e));
+      return null;
     }
-    return null;
+  }
+
+  public String moodleCourseId() {
+    return read().getValueOrDefault(MOODLE_COURSE_ID_KEY, StringPool.EMPTY);
   }
 
   public String bucketName() {

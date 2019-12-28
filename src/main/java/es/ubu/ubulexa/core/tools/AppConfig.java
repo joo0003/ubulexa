@@ -32,4 +32,8 @@ public class AppConfig {
   public String skillId() {
     return configPropsReader.skillId();
   }
+
+  public String moodleCourseId() {
+    return configPropsReader.moodleCourseId();
+  }
 }

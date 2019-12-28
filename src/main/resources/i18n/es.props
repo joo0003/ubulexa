@@ -1,8 +1,5 @@
-LaunchRequestHandlerModel.speechtext = Bienvenido a UBUlexa.
-CancelIntentHandlerModel.speechtext = Adiós.
-StopIntentHandlerModel.speechtext = Adiós.
-HelpIntentHandlerModel.speechtext = Puedes decir calendario.
-VoiceSettingIntentHandlerModel.speechtext = Muy bien.
-FallbackIntentHandlerModel.speechtext = Lo siento. No he entendido lo que me has dicho.
-FirstTimeIntent.speechtext = ¡Bienvenido a Ubulexa! Esta skill esta conectada con UbuVirtual y te permite saber los próximos eventos de tu calendario de la UBU. Si quieres saber si tienes eventos en los próximos días, simplemente di calendario.
-CalendarIntent.speechtext = No tienes ningún evento en tu calendario para los próximos días.
+speechtext.goodbye = Adiós.
+speechtext.help = Puedes decir calendario.
+speechtext.fallback = Lo siento. No he entendido lo que me has dicho.
+speechtext.calendar.noevents = No tienes ningún evento en tu calendario para los próximos días.
+speechtext.firsttime = ¡Bienvenido a Ubulexa! Esta skill esta conectada con UbuVirtual y te permite saber los próximos eventos de tu calendario de la UBU. Si quieres saber si tienes eventos en los próximos días, simplemente di calendario.

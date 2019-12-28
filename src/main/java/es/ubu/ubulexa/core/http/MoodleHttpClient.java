@@ -1,7 +1,5 @@
 package es.ubu.ubulexa.core.http;
 
-import static es.ubu.ubulexa.core.Constants.MOODLE_MOBILE_APP;
-
 import es.ubu.ubulexa.core.tools.AppConfig;
 import es.ubu.ubulexa.core.utils.HttpRequestUtils;
 import jodd.http.HttpRequest;
@@ -29,7 +27,41 @@ public class MoodleHttpClient {
     String url = appConfig.moodleHostUrl() + "/login/token.php";
     url += "?username=" + username;
     url += "&password=" + password;
-    url += "&service=" + MOODLE_MOBILE_APP;
+    url += "&service=MOODLE_MOBILE_APP";
+
+    HttpRequest httpRequest = httpRequestUtils.get(url);
+    HttpResponse response = httpRequest.send();
+    return response.body();
+  }
+
+  public String getSiteInfo(String moodleToken) {
+    String url = appConfig.moodleHostUrl() + "/webservice/rest/server.php";
+    url += "?moodlewsrestformat=json";
+    url += "&wstoken=" + moodleToken;
+    url += "&wsfunction=core_webservice_get_site_info";
+
+    HttpRequest httpRequest = httpRequestUtils.get(url);
+    HttpResponse response = httpRequest.send();
+    return response.body();
+  }
+
+  public String getUserCourses(String moodleToken, String userId) {
+    String url = appConfig.moodleHostUrl() + "/webservice/rest/server.php";
+    url += "?moodlewsrestformat=json";
+    url += "&wstoken=" + moodleToken;
+    url += "&wsfunction=core_enrol_get_users_courses";
+    url += "&userid=" + userId;
+
+    HttpRequest httpRequest = httpRequestUtils.get(url);
+    HttpResponse response = httpRequest.send();
+    return response.body();
+  }
+
+  public String getUserCalendarEvents(String moodleToken) {
+    String url = appConfig.moodleHostUrl() + "/webservice/rest/server.php";
+    url += "?moodlewsrestformat=json";
+    url += "&wstoken=" + moodleToken;
+    url += "&wsfunction=core_calendar_get_calendar_events";
 
     HttpRequest httpRequest = httpRequestUtils.get(url);
     HttpResponse response = httpRequest.send();

@@ -2,12 +2,11 @@ package es.ubu.ubulexa.core.controllers;
 
 import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.tools.AccessTokenCreator;
-import es.ubu.ubulexa.core.tools.MoodleTokenExchanger;
 import es.ubu.ubulexa.core.tools.ThreefishEncrypter;
+import es.ubu.ubulexa.core.tools.moodle.MoodleTokenFetcher;
 import es.ubu.ubulexa.core.utils.Base64Utils;
 import es.ubu.ubulexa.core.utils.JsonUtils;
 import es.ubu.ubulexa.core.utils.UrlUtils;
-import es.ubu.ubulexa.core.utils.UuidUtils;
 import java.util.HashMap;
 import java.util.Map;
 import jodd.petite.meta.PetiteBean;
@@ -23,11 +22,10 @@ public class WebAuthController extends AbstractController {
 
   private UrlUtils urlUtils;
   private Base64Utils base64Utils;
-  private MoodleTokenExchanger moodleTokenExchanger;
+  private MoodleTokenFetcher moodleTokenFetcher;
   private AccessTokenCreator accessTokenCreator;
   private JsonUtils jsonUtils;
   private ThreefishEncrypter threefishEncrypter;
-  private UuidUtils uuidUtils;
 
   @PetiteInject
   public void setUrlUtils(UrlUtils urlUtils) {
@@ -45,11 +43,6 @@ public class WebAuthController extends AbstractController {
   }
 
   @PetiteInject
-  public void setUuidUtils(UuidUtils uuidUtils) {
-    this.uuidUtils = uuidUtils;
-  }
-
-  @PetiteInject
   public void setJsonUtils(JsonUtils jsonUtils) {
     this.jsonUtils = jsonUtils;
   }
@@ -60,8 +53,8 @@ public class WebAuthController extends AbstractController {
   }
 
   @PetiteInject
-  public void setMoodleTokenExchanger(MoodleTokenExchanger moodleTokenExchanger) {
-    this.moodleTokenExchanger = moodleTokenExchanger;
+  public void setMoodleTokenFetcher(MoodleTokenFetcher moodleTokenFetcher) {
+    this.moodleTokenFetcher = moodleTokenFetcher;
   }
 
   public ModelAndView get(Request req, Response res) {
@@ -83,7 +76,7 @@ public class WebAuthController extends AbstractController {
     String state = StringUtils.defaultString(req.queryParams("state"));
     String redirectUri = StringUtils.defaultString(req.queryParams("redirectUri"));
 
-    String moodleToken = moodleTokenExchanger.exchange(username, password);
+    String moodleToken = moodleTokenFetcher.fetch(username, password);
 
     if (StringUtils.isBlank(moodleToken)) {
       Map<String, Object> attributes = new HashMap<>();
