@@ -1,7 +1,7 @@
 package es.ubu.ubulexa.core.tools.resolvers;
 
 import es.ubu.ubulexa.core.Constants;
-import es.ubu.ubulexa.skill.handlers.intents.matchers.AbstractIntentMatcher;
+import es.ubu.ubulexa.core.handlers.intents.matchers.AbstractIntentMatcher;
 import es.ubu.ubulexa.core.utils.ClassLoaderUtils;
 import java.io.InputStream;
 import jodd.exception.ExceptionUtil;

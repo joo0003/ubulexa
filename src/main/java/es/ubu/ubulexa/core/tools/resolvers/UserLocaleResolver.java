@@ -2,7 +2,7 @@ package es.ubu.ubulexa.core.tools.resolvers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import es.ubu.ubulexa.core.Constants;
-import es.ubu.ubulexa.skill.handlers.intents.matchers.AbstractIntentMatcher;
+import es.ubu.ubulexa.core.handlers.intents.matchers.AbstractIntentMatcher;
 import jodd.petite.meta.PetiteBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

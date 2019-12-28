@@ -6,9 +6,9 @@ import static spark.Spark.post;
 
 import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.utils.FreemarkerUtils;
-import es.ubu.ubulexa.web.controllers.HealthController;
-import es.ubu.ubulexa.web.controllers.PrivacyPolicyController;
-import es.ubu.ubulexa.web.controllers.WebAuthController;
+import es.ubu.ubulexa.core.controllers.HealthController;
+import es.ubu.ubulexa.core.controllers.PrivacyPolicyController;
+import es.ubu.ubulexa.core.controllers.WebAuthController;
 import jodd.exception.ExceptionUtil;
 import jodd.net.HttpStatus;
 import jodd.petite.meta.PetiteBean;

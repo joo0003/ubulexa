@@ -3,6 +3,7 @@ package es.ubu.ubulexa.core.tools;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import es.ubu.ubulexa.core.utils.Base64Utils;
+import es.ubu.ubulexa.core.utils.HandlerInputUtils;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +15,12 @@ public class JwtDecoder {
   private ThreefishDecrypter threefishDecrypter;
   private Base64Utils base64Utils;
   private AppConfig appConfig;
+  private HandlerInputUtils handlerInputUtils;
+
+  @PetiteInject
+  public void setHandlerInputUtils(HandlerInputUtils handlerInputUtils) {
+    this.handlerInputUtils = handlerInputUtils;
+  }
 
   @PetiteInject
   public void setAppConfig(AppConfig appConfig) {
@@ -52,6 +59,10 @@ public class JwtDecoder {
   }
 
   private String extractAccessToken(HandlerInput handlerInput) {
-    return handlerInput.getRequestEnvelope().getContext().getSystem().getUser().getAccessToken();
+    return handlerInputUtils.getRequestEnvelope(handlerInput)
+        .getContext()
+        .getSystem()
+        .getUser()
+        .getAccessToken();
   }
 }

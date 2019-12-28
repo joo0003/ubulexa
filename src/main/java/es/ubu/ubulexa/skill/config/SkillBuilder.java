@@ -7,19 +7,19 @@ import com.amazon.ask.model.Response;
 import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
+import es.ubu.ubulexa.core.handlers.intents.CalendarIntentHandler;
+import es.ubu.ubulexa.core.handlers.intents.CancelIntentHandler;
+import es.ubu.ubulexa.core.handlers.intents.FallbackIntentHandler;
+import es.ubu.ubulexa.core.handlers.intents.FirstTimeIntentHandler;
+import es.ubu.ubulexa.core.handlers.intents.HelpIntentHandler;
+import es.ubu.ubulexa.core.handlers.intents.NavigateHomeIntentHandler;
+import es.ubu.ubulexa.core.handlers.intents.StopIntentHandler;
+import es.ubu.ubulexa.core.handlers.intents.VoiceChangeIntentHandler;
+import es.ubu.ubulexa.core.handlers.requesthandlers.LaunchRequestHandler;
+import es.ubu.ubulexa.core.handlers.requesthandlers.SessionEndedRequestHandler;
+import es.ubu.ubulexa.core.requestinterceptors.MainRequestInterceptor;
 import es.ubu.ubulexa.core.tools.AppConfig;
 import es.ubu.ubulexa.core.utils.SkillsUtils;
-import es.ubu.ubulexa.skill.handlers.exceptions.NoFirstTimeUserEventFoundExceptionHandler;
-import es.ubu.ubulexa.skill.handlers.intents.CalendarIntentHandler;
-import es.ubu.ubulexa.skill.handlers.intents.CancelIntentHandler;
-import es.ubu.ubulexa.skill.handlers.intents.FallbackIntentHandler;
-import es.ubu.ubulexa.skill.handlers.intents.HelpIntentHandler;
-import es.ubu.ubulexa.skill.handlers.intents.NavigateHomeIntentHandler;
-import es.ubu.ubulexa.skill.handlers.intents.StopIntentHandler;
-import es.ubu.ubulexa.skill.handlers.intents.VoiceChangeIntentHandler;
-import es.ubu.ubulexa.skill.handlers.requesthandlers.LaunchRequestHandler;
-import es.ubu.ubulexa.skill.handlers.requesthandlers.SessionEndedRequestHandler;
-import es.ubu.ubulexa.skill.requestinterceptors.MainRequestInterceptor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +60,6 @@ public class SkillBuilder {
 
   private List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers() {
     List<GenericExceptionHandler<HandlerInput, Optional<Response>>> l = new ArrayList<>();
-    l.add(petiteContainer.getBean(NoFirstTimeUserEventFoundExceptionHandler.class));
     return l;
   }
 
@@ -72,6 +71,7 @@ public class SkillBuilder {
 
   private List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers() {
     List<GenericRequestHandler<HandlerInput, Optional<Response>>> l = new ArrayList<>();
+    l.add(petiteContainer.getBean(FirstTimeIntentHandler.class));
     l.add(petiteContainer.getBean(LaunchRequestHandler.class));
     l.add(petiteContainer.getBean(SessionEndedRequestHandler.class));
     l.add(petiteContainer.getBean(HelpIntentHandler.class));

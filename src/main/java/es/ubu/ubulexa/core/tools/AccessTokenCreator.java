@@ -36,6 +36,7 @@ public class AccessTokenCreator {
 
     Builder jwtBuilder = jwtUtils.builder();
     jwtBuilder.withSubject(userId);
+    jwtBuilder.withClaim(Constants.JWT_USER_ID_CLAIM, userId);
     jwtBuilder.withClaim(Constants.JWT_USERNAME_CLAIM, username);
     jwtBuilder.withClaim(Constants.JWT_MOODLE_TOKEN_CLAIM, moodleToken);
     jwtBuilder.withIssuedAt(Date.valueOf(localDateTimeUtils.nowUtc().toLocalDate()));

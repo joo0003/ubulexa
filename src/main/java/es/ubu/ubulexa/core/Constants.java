@@ -25,6 +25,7 @@ public class Constants {
   public static final String EN_PROPS_FILENAME = "i18n/en.props";
   public static final String ES_PROPS_FILENAME = "i18n/es.props";
 
+  public static final String JWT_USER_ID_CLAIM = "userId";
   public static final String JWT_USERNAME_CLAIM = "username";
   public static final String JWT_MOODLE_TOKEN_CLAIM = "moodleToken";
 
@@ -36,8 +37,6 @@ public class Constants {
 
   public static final String FAKE_AMAZON_UBU_EMAIL = "amazon123@alu.ubu.es";
 
-  public static final String NO_FIRST_TIME_USER_EVENT_FOUND_EXCEPTION_SPEECH_TEXT_KEY = "NoFirstTimeUserEventFoundException.speechtext";
-
   public static final String LAUNCH_REQUEST_SPEECH_TEXT_KEY = "LaunchRequest.speechtext";
 
   public static final String CANCEL_INTENT_SPEECH_TEXT_KEY = "CancelIntent.speechtext";
@@ -46,4 +45,7 @@ public class Constants {
   public static final String FALLBACK_INTENT_SPEECH_TEXT_KEY = "FallbackIntent.speechtext";
   public static final String HELP_INTENT_SPEECH_TEXT_KEY = "HelpIntent.speechtext";
   public static final String CALENDAR_INTENT_SPEECH_TEXT_KEY = "CalendarIntent.speechtext";
+  public static final String FIRST_TIME_INTENT_SPEECH_TEXT_KEY = "FirstTimeIntent.speechtext";
+
+  public static final String FIRST_TIME_SESSION_ATTR_KEY = "FirstTime";
 }

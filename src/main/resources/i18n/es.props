@@ -4,7 +4,5 @@ StopIntentHandlerModel.speechtext = Adiós.
 HelpIntentHandlerModel.speechtext = Puedes decir calendario.
 VoiceSettingIntentHandlerModel.speechtext = Muy bien.
 FallbackIntentHandlerModel.speechtext = Lo siento. No he entendido lo que me has dicho.
-
-NoFirstTimeUserEventFoundException.speechtext = ¡Bienvenido a Ubulexa! Esta skill esta conectada con UbuVirtual y te permite saber los próximos eventos de tu calendario de la UBU. Si quieres saber si tienes eventos en los próximos días, simplemente di calendario.
-
+FirstTimeIntent.speechtext = ¡Bienvenido a Ubulexa! Esta skill esta conectada con UbuVirtual y te permite saber los próximos eventos de tu calendario de la UBU. Si quieres saber si tienes eventos en los próximos días, simplemente di calendario.
 CalendarIntent.speechtext = No tienes ningún evento en tu calendario para los próximos días.

@@ -1,6 +1,6 @@
 package es.ubu.ubulexa.core.pojos;
 
-import es.ubu.ubulexa.skill.handlers.HandlerModel;
+import es.ubu.ubulexa.core.handlers.HandlerModel;
 
 public class ResponseTemplate {
 
