@@ -2,7 +2,7 @@ package es.ubu.ubulexa.core.tools.s3dumpers;
 
 import es.ubu.ubulexa.core.tools.AppConfig;
 import es.ubu.ubulexa.core.utils.AmazonS3Utils;
-import es.ubu.ubulexa.core.utils.ClockUtils;
+import es.ubu.ubulexa.core.utils.time.ClockUtils;
 import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;

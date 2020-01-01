@@ -1,4 +1,4 @@
-package es.ubu.ubulexa.core.utils;
+package es.ubu.ubulexa.core.utils.time;
 
 import java.time.Clock;
 import jodd.petite.meta.PetiteBean;

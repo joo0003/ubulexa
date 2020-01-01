@@ -30,12 +30,7 @@ public class MoodleUserCalendarEventsFetcher extends AbstractMoodleFetcher {
       if (!jsonArray.isEmpty()) {
         for (int i = 0; i < jsonArray.size(); i++) {
           CalendarEvent event = buildEvent(jsonArray.getJsonObject(i));
-
-          if (StringUtil.isNotBlank(event.getCourseId()) &&
-              StringUtil.equals(event.getCourseId(), appConfig().moodleCourseId())
-          ) {
-            events.add(event);
-          }
+          events.add(event);
         }
       }
     } catch (Exception e) {
@@ -51,7 +46,7 @@ public class MoodleUserCalendarEventsFetcher extends AbstractMoodleFetcher {
     event.setCourseId(StringUtil.toString(jsonObject.getInteger("courseid", null)));
     event.setName(jsonObject.getString("name", null));
     event.setDescription(jsonObject.getString("description", null));
-    event.setTimestart(jsonObject.getLong("timestart", null));
+    event.setTimestart(jsonObject.getInteger("timestart", null));
     return event;
   }
 }

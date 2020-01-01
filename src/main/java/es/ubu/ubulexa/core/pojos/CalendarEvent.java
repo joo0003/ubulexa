@@ -5,7 +5,7 @@ public class CalendarEvent {
   private String courseId;
   private String name;
   private String eventId;
-  private Long timestart;
+  private Integer timestart;
   private String description;
 
   public String getCourseId() {
@@ -32,11 +32,11 @@ public class CalendarEvent {
     this.eventId = eventId;
   }
 
-  public Long getTimestart() {
+  public Integer getTimestart() {
     return timestart;
   }
 
-  public void setTimestart(Long timestart) {
+  public void setTimestart(Integer timestart) {
     this.timestart = timestart;
   }
 

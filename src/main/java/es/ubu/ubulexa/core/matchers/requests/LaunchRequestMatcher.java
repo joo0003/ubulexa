@@ -10,5 +10,4 @@ public class LaunchRequestMatcher extends AbstractRequestMatcher {
   public boolean match(HandlerInput handlerInput) {
     return super.match(handlerInput, LaunchRequest.class);
   }
-
 }
