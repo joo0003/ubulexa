@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "ubulexa",
+      "invocationName": "skill de la ubu",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",

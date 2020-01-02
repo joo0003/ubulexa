@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UBUlexa - Conecta tu cuenta</title>
+  <title>Skill de la UBU - Conecta tu cuenta</title>
 
   <style type="text/css"><#include "css/bulma.css"></style>
 </head>
