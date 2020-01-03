@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "skill de la ubu",
+      "invocationName": "calendario de la ubu",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",

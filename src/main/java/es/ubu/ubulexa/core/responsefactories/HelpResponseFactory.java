@@ -27,6 +27,8 @@ public class HelpResponseFactory extends AbstractResponseFactory {
 
     builder.withSpeech(speechText);
 
+    builder.withShouldEndSession(false);
+
     return builder.build();
   }
 }

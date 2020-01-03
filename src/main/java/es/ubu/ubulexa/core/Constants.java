@@ -48,5 +48,5 @@ public class Constants {
   public static final String CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY = "speechtext.calendar.noevents";
   public static final String FIRST_TIME_SPEECH_TEXT_KEY = "speechtext.firsttime";
 
-  public static final String FIRST_TIME_SESSION_ATTR_KEY = "FirstTime";
+  public static final String FIRST_TIME_SESSION_ATTR_KEY = "firstTime";
 }

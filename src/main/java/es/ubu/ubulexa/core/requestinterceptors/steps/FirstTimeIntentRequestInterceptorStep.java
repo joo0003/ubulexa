@@ -7,6 +7,7 @@ import es.ubu.ubulexa.core.tools.sessionattributes.FirstTimeSessionAttributeSett
 import es.ubu.ubulexa.core.utils.AmazonS3Utils;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
+import jodd.util.StringUtil;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,16 +47,16 @@ public class FirstTimeIntentRequestInterceptorStep extends AbstractRequestInterc
     firstTimeSessionAttributeSetter.set(handlerInput, !b);
 
     if (!b) {
-      saveFileToS3(handlerInput);
+      saveFileToS3(userId);
     }
   }
 
-  private void saveFileToS3(HandlerInput handlerInput) {
+  private void saveFileToS3(String userId) {
     try {
-      String userId = extractUserId(handlerInput);
-
-      String key = Constants.SUBFOLDER_FIRST_TIME_USER_EVENTS_NAME + "/" + userId;
-      amazonS3Utils.putObject(appConfig().bucketName(), key, userId);
+      if (StringUtil.isNotBlank(userId)) {
+        String key = Constants.SUBFOLDER_FIRST_TIME_USER_EVENTS_NAME + "/" + userId;
+        amazonS3Utils.putObject(appConfig().bucketName(), key, userId);
+      }
     } catch (Exception e) {
       LOGGER.error(ExceptionUtils.getStackTrace(e));
     }
