@@ -17,7 +17,8 @@ public class MoodleUserIdFetcher extends AbstractMoodleFetcher {
 
       JsonObject jsonObject = jsonUtils().jsonParser().parseAsJsonObject(response);
 
-      return jsonObject.getString("userid", null);
+      Integer userId = jsonObject.getInteger("userid", null);
+      return null == userId ? null : userId.toString();
     } catch (Exception e) {
       LOGGER.error(ExceptionUtils.getStackTrace(e));
       return null;

@@ -59,5 +59,6 @@ public class CalendarResponseFactory extends AbstractResponseFactory {
       return dictionary.getValue(Constants.CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY);
     }
     return dictionary.getValue(Constants.CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY);
+    //return events.get(0).getEventTitle();
   }
 }

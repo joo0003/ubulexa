@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import jodd.json.JsonArray;
 import jodd.petite.meta.PetiteBean;
-import jodd.util.StringPool;
-import jodd.util.StringUtil;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +26,10 @@ public class MoodleUserCoursesFetcher extends AbstractMoodleFetcher {
       }
 
       for (int i = 0; i < jsonArray.size(); i++) {
-        String courseId = jsonArray.getJsonObject(i).getString("id", StringPool.EMPTY);
-        courseId = StringUtil.trimDown(courseId);
-        courseIds.add(courseId);
+        Integer courseId = jsonArray.getJsonObject(i).getInteger("id", null);
+        if (null != courseId) {
+          courseIds.add(courseId.toString());
+        }
       }
 
       courseIds.remove(null);

@@ -1,12 +1,17 @@
 package es.ubu.ubulexa.core;
 
+import java.time.ZoneId;
+import java.util.TimeZone;
+
 public class Constants {
 
   public static final String APPLICATION_JSON_MEDIA_TYPE = "application/json";
   public static final String APPLICATION_PLAIN_TEXT_MEDIA_TYPE = "text/plain";
   public static final String APPLICATION_HTML_MEDIA_TYPE = "text/html";
 
+  public static final String CALENDAR_JSON_FILENAME = "calendar.json";
   public static final String CONFIG_PROPS_FILENAME = "config.props";
+
   public static final String BUCKET_NAME_KEY = "bucketName";
   public static final String THREEFISH_SECRET_KEY = "threefishSecret";
   public static final String MOODLE_HOST_URL_KEY = "moodleHostUrl";
@@ -20,6 +25,9 @@ public class Constants {
   public static final String HELP_INTENT = "AMAZON.HelpIntent";
   public static final String NAVIGATE_HOME_INTENT = "AMAZON.NavigateHomeIntent";
   public static final String CALENDAR_INTENT = "CalendarIntent";
+
+  public static final String CET_TIMEZONE_ID = "CET";
+  public static final ZoneId CET_ZONE_ID = TimeZone.getTimeZone(CET_TIMEZONE_ID).toZoneId();
 
   public static final String ES_ES_LOCALE_CODE = "es-ES";
   public static final String EN_US_LOCALE_CODE = "en-US";

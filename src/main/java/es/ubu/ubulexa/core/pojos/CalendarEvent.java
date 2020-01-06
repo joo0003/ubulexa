@@ -2,11 +2,31 @@ package es.ubu.ubulexa.core.pojos;
 
 public class CalendarEvent {
 
+  private String eventId;
+
   private String courseId;
   private String name;
-  private String eventId;
   private Integer timestart;
   private String description;
+
+  private String eventDate;
+  private String eventTitle;
+
+  public String getEventDate() {
+    return eventDate;
+  }
+
+  public void setEventDate(String eventDate) {
+    this.eventDate = eventDate;
+  }
+
+  public String getEventTitle() {
+    return eventTitle;
+  }
+
+  public void setEventTitle(String eventTitle) {
+    this.eventTitle = eventTitle;
+  }
 
   public String getCourseId() {
     return courseId;

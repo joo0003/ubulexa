@@ -20,4 +20,8 @@ public class IOUtils {
   public void write(byte[] bytes, OutputStream outputStream) throws IOException {
     org.apache.commons.io.IOUtils.write(bytes, outputStream);
   }
+
+  public String toString(InputStream is) throws IOException {
+    return org.apache.commons.io.IOUtils.toString(is, StandardCharsets.UTF_8);
+  }
 }
