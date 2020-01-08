@@ -7,10 +7,10 @@ import jodd.util.StringPool;
 import org.apache.commons.lang3.BooleanUtils;
 
 @PetiteBean
-public class FirstTimeSessionAttributeGetter extends AbstractSessionAttributeGetter {
+public class MoodleTokenInvalidSessionAttributeGetter extends AbstractSessionAttributeGetter {
 
   public boolean get(HandlerInput handlerInput) {
-    Object o = getAll(handlerInput).get(Constants.FIRST_TIME_SESSION_ATTR_KEY);
+    Object o = getAll(handlerInput).get(Constants.MOODLE_TOKEN_INVALID_SESSION_ATTR_KEY);
     if (null == o) {
       return false;
     }

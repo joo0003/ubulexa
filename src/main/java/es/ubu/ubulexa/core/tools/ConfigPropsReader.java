@@ -9,20 +9,16 @@ import static es.ubu.ubulexa.core.Constants.SKILL_ID_KEY;
 import static es.ubu.ubulexa.core.Constants.THREEFISH_SECRET_KEY;
 
 import es.ubu.ubulexa.core.utils.ClassLoaderUtils;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import es.ubu.ubulexa.core.utils.PropsUtils;
 import java.io.InputStream;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import jodd.props.Props;
 import jodd.util.StringPool;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class ConfigPropsReader {
-
-  private static Logger LOGGER = LoggerFactory.getLogger(ConfigPropsReader.class);
 
   private static Props PROPS;
 
@@ -47,7 +43,7 @@ public class ConfigPropsReader {
       }
       return PROPS;
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtils.getStackTrace(e));
+      ExceptionUtils.log(e);
       return null;
     }
   }

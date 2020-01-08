@@ -4,18 +4,13 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import es.ubu.ubulexa.core.utils.JwtUtils;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class AccessTokenParser {
-
-  private static final Logger LOGGER = LoggerFactory
-      .getLogger(AccessTokenParser.class);
 
   private JwtUtils jwtUtils;
   private AppConfig appConfig;
@@ -36,7 +31,7 @@ public class AccessTokenParser {
     try {
       return jwtVerifier.verify(token);
     } catch (JWTVerificationException e) {
-      LOGGER.error(ExceptionUtils.getStackTrace(e));
+      ExceptionUtils.log(e);
       return null;
     }
   }

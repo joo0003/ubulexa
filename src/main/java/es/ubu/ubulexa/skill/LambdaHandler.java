@@ -2,18 +2,14 @@ package es.ubu.ubulexa.skill;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import es.ubu.ubulexa.skill.config.petite.PetiteInitializer;
 import es.ubu.ubulexa.skill.config.petite.PetitePostInitializer;
 import java.io.InputStream;
 import java.io.OutputStream;
-import jodd.exception.ExceptionUtil;
 import jodd.petite.PetiteContainer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class LambdaHandler implements RequestStreamHandler {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(LambdaHandler.class);
 
   private static PetiteContainer petiteContainer;
 
@@ -24,7 +20,8 @@ public class LambdaHandler implements RequestStreamHandler {
         PetitePostInitializer.init(petiteContainer);
       }
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
+      ExceptionUtils.log(e);
+      throw new RuntimeException(e);
     }
   }
 

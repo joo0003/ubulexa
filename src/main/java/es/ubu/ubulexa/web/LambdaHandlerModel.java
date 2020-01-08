@@ -4,22 +4,18 @@ import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
 import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
 import com.amazonaws.serverless.proxy.spark.SparkLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import es.ubu.ubulexa.core.utils.StreamUtils;
 import es.ubu.ubulexa.core.utils.UuidUtils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class LambdaHandlerModel {
-
-  private static Logger LOGGER = LoggerFactory.getLogger(LambdaHandlerModel.class);
 
   // private S3Dumper s3Dumper;
   private UuidUtils uuidUtils;
@@ -73,7 +69,7 @@ public class LambdaHandlerModel {
       outputStream.write(outputBytes);
       outputStream.close();
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
+      ExceptionUtils.log(e);
     }
   }
 }

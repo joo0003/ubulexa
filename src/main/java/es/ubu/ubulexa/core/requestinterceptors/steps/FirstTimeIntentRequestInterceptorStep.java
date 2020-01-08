@@ -5,18 +5,13 @@ import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.daos.FirstTimeUserEventDao;
 import es.ubu.ubulexa.core.tools.sessionattributes.FirstTimeSessionAttributeSetter;
 import es.ubu.ubulexa.core.utils.AmazonS3Utils;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import jodd.util.StringUtil;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class FirstTimeIntentRequestInterceptorStep extends AbstractRequestInterceptorStep {
-
-  private static final Logger LOGGER = LoggerFactory
-      .getLogger(FirstTimeIntentRequestInterceptorStep.class);
 
   private AmazonS3Utils amazonS3Utils;
   private FirstTimeUserEventDao firstTimeUserEventDao;
@@ -58,7 +53,7 @@ public class FirstTimeIntentRequestInterceptorStep extends AbstractRequestInterc
         amazonS3Utils.putObject(appConfig().bucketName(), key, userId);
       }
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtils.getStackTrace(e));
+      ExceptionUtils.log(e);
     }
   }
 }

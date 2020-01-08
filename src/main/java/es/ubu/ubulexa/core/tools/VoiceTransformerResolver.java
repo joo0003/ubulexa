@@ -7,14 +7,9 @@ import es.ubu.ubulexa.core.tools.voicetransformers.VoiceTransformer;
 import jodd.petite.PetiteContainer;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class VoiceTransformerResolver {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(
-      VoiceTransformerResolver.class);
 
   private PetiteContainer petiteContainer;
   private FirstTimeUserEventDao firstTimeUserEventDao;

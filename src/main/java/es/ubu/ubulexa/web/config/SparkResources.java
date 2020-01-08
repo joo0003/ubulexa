@@ -5,22 +5,18 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 
 import es.ubu.ubulexa.core.Constants;
-import es.ubu.ubulexa.core.utils.FreemarkerUtils;
 import es.ubu.ubulexa.core.controllers.HealthController;
 import es.ubu.ubulexa.core.controllers.PrivacyPolicyController;
 import es.ubu.ubulexa.core.controllers.WebAuthController;
-import jodd.exception.ExceptionUtil;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
+import es.ubu.ubulexa.core.utils.FreemarkerUtils;
 import jodd.net.HttpStatus;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import jodd.util.StringPool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class SparkResources {
-
-  private static Logger LOGGER = LoggerFactory.getLogger(SparkResources.class);
 
   private FreemarkerUtils freemarkerUtils;
   private HealthController healthController;
@@ -65,7 +61,7 @@ public class SparkResources {
 
   private void defineExceptions() {
     exception(Exception.class, (exception, request, response) -> {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(exception));
+      ExceptionUtils.log(exception);
       response.status(HttpStatus.error500().status());
       response.type(Constants.APPLICATION_JSON_MEDIA_TYPE);
       response.body(StringPool.EMPTY);

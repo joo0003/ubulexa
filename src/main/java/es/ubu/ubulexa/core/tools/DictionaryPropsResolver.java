@@ -1,18 +1,14 @@
 package es.ubu.ubulexa.core.tools;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import java.io.InputStream;
-import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import jodd.props.Props;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class DictionaryPropsResolver {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(DictionaryPropsResolver.class);
 
   private DictionaryFileResolver dictionaryFileResolver;
   private UserLocaleResolver userLocaleResolver;
@@ -39,7 +35,7 @@ public class DictionaryPropsResolver {
       props.load(is);
       return props;
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
+      ExceptionUtils.log(e);
     }
     return null;
   }

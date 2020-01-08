@@ -2,17 +2,13 @@ package es.ubu.ubulexa.core.tools.s3dumpers;
 
 import es.ubu.ubulexa.core.tools.AppConfig;
 import es.ubu.ubulexa.core.utils.AmazonS3Utils;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import es.ubu.ubulexa.core.utils.time.ClockUtils;
-import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public abstract class AbstractS3Dumper {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractS3Dumper.class);
 
   private ClockUtils clockUtils;
   private AmazonS3Utils amazonS3Utils;
@@ -39,7 +35,7 @@ public abstract class AbstractS3Dumper {
       String key = keyPrefix + "/" + filename;
       amazonS3Utils.putObject(appConfig.bucketName(), key, bytes);
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
+      ExceptionUtils.log(e);
     }
   }
 }

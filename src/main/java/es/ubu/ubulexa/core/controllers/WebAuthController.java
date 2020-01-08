@@ -3,6 +3,7 @@ package es.ubu.ubulexa.core.controllers;
 import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.tools.AccessTokenCreator;
 import es.ubu.ubulexa.core.tools.ThreefishEncrypter;
+import es.ubu.ubulexa.core.tools.UserIdFactory;
 import es.ubu.ubulexa.core.tools.moodle.MoodleTokenFetcher;
 import es.ubu.ubulexa.core.utils.Base64Utils;
 import es.ubu.ubulexa.core.utils.JsonUtils;
@@ -26,6 +27,12 @@ public class WebAuthController extends AbstractController {
   private AccessTokenCreator accessTokenCreator;
   private JsonUtils jsonUtils;
   private ThreefishEncrypter threefishEncrypter;
+  private UserIdFactory userIdFactory;
+
+  @PetiteInject
+  public void setUserIdFactory(UserIdFactory userIdFactory) {
+    this.userIdFactory = userIdFactory;
+  }
 
   @PetiteInject
   public void setUrlUtils(UrlUtils urlUtils) {
@@ -88,7 +95,7 @@ public class WebAuthController extends AbstractController {
       return new ModelAndView(attributes, "webauth.ftl");
     }
 
-    String userId = base64Utils.encode(username);
+    String userId = userIdFactory.build(username);
 
     String jwt = accessTokenCreator.create(userId, username, moodleToken);
 

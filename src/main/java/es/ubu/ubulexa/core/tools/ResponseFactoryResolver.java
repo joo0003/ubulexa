@@ -6,6 +6,7 @@ import es.ubu.ubulexa.core.matchers.intents.CancelIntentMatcher;
 import es.ubu.ubulexa.core.matchers.intents.FallbackIntentMatcher;
 import es.ubu.ubulexa.core.matchers.intents.FirstTimeIntentMatcher;
 import es.ubu.ubulexa.core.matchers.intents.HelpIntentMatcher;
+import es.ubu.ubulexa.core.matchers.intents.MoodleTokenInvalidIntentMatcher;
 import es.ubu.ubulexa.core.matchers.intents.NavigateHomeIntentMatcher;
 import es.ubu.ubulexa.core.matchers.intents.StopIntentMatcher;
 import es.ubu.ubulexa.core.matchers.requests.LaunchRequestMatcher;
@@ -15,6 +16,7 @@ import es.ubu.ubulexa.core.responsefactories.FallbackResponseFactory;
 import es.ubu.ubulexa.core.responsefactories.FirstTimeResponseFactory;
 import es.ubu.ubulexa.core.responsefactories.GoodByeResponseFactory;
 import es.ubu.ubulexa.core.responsefactories.HelpResponseFactory;
+import es.ubu.ubulexa.core.responsefactories.MoodleTokenInvalidResponseFactory;
 import es.ubu.ubulexa.core.responsefactories.ResponseFactory;
 import jodd.petite.PetiteContainer;
 import jodd.petite.meta.PetiteBean;
@@ -36,6 +38,11 @@ public class ResponseFactoryResolver {
     }
 
     // KEEP IT FIRST ALWAYS
+    if (isMoodleTokenInvalidIntent(handlerInput)) {
+      return petiteContainer.getBean(MoodleTokenInvalidResponseFactory.class);
+    }
+
+    // KEEP IT SECOND ALWAYS
     if (isFirstTimeIntent(handlerInput)) {
       return petiteContainer.getBean(FirstTimeResponseFactory.class);
     }
@@ -73,6 +80,10 @@ public class ResponseFactoryResolver {
     }
 
     return null;
+  }
+
+  private boolean isMoodleTokenInvalidIntent(HandlerInput handlerInput) {
+    return petiteContainer.getBean(MoodleTokenInvalidIntentMatcher.class).match(handlerInput);
   }
 
   private boolean isSessionEndedRequest(HandlerInput handlerInput) {

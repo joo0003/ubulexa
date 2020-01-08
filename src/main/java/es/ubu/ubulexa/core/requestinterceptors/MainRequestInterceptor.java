@@ -3,6 +3,7 @@ package es.ubu.ubulexa.core.requestinterceptors;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
 import es.ubu.ubulexa.core.requestinterceptors.steps.FirstTimeIntentRequestInterceptorStep;
+import es.ubu.ubulexa.core.requestinterceptors.steps.MoodleTokenValidityRequestInterceptorStep;
 import jodd.petite.PetiteContainer;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
@@ -19,6 +20,7 @@ public class MainRequestInterceptor implements RequestInterceptor {
 
   @Override
   public void process(HandlerInput handlerInput) {
+    petiteContainer.getBean(MoodleTokenValidityRequestInterceptorStep.class).run(handlerInput);
     petiteContainer.getBean(FirstTimeIntentRequestInterceptorStep.class).run(handlerInput);
   }
 }

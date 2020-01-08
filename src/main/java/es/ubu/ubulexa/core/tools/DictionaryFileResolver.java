@@ -1,19 +1,14 @@
 package es.ubu.ubulexa.core.tools;
 
 import es.ubu.ubulexa.core.Constants;
-import es.ubu.ubulexa.core.matchers.intents.AbstractIntentMatcher;
 import es.ubu.ubulexa.core.utils.ClassLoaderUtils;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import java.io.InputStream;
-import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class DictionaryFileResolver {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractIntentMatcher.class);
 
   private ClassLoaderUtils classLoaderUtils;
 
@@ -29,7 +24,7 @@ public class DictionaryFileResolver {
       }
       return classLoaderUtils.getResourceAsStream(Constants.EN_PROPS_FILENAME);
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
+      ExceptionUtils.log(e);
     }
     return null;
   }

@@ -6,20 +6,16 @@ import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
 import com.amazonaws.serverless.proxy.spark.SparkLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import es.ubu.ubulexa.web.config.SparkResources;
 import es.ubu.ubulexa.web.config.petite.PetiteInitializer;
 import es.ubu.ubulexa.web.config.petite.PetitePostInitializer;
 import java.io.InputStream;
 import java.io.OutputStream;
-import jodd.exception.ExceptionUtil;
 import jodd.petite.PetiteContainer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import spark.Spark;
 
 public class LambdaHandler implements RequestStreamHandler {
-
-  private static Logger LOGGER = LoggerFactory.getLogger(LambdaHandler.class);
 
   private static SparkLambdaContainerHandler<AwsProxyRequest, AwsProxyResponse> handler;
   private static PetiteContainer petiteContainer;
@@ -37,7 +33,7 @@ public class LambdaHandler implements RequestStreamHandler {
         Spark.awaitInitialization();
       }
     } catch (ContainerInitializationException e) {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
+      ExceptionUtils.log(e);
       throw new RuntimeException(e);
     }
   }

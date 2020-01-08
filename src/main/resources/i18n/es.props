@@ -3,3 +3,4 @@ speechtext.help = Si quieres saber si tienes eventos en los próximos días, sim
 speechtext.fallback = Lo siento. No he entendido lo que me has dicho.
 speechtext.calendar.noevents = No tienes ningún evento en tu calendario para los próximos días.
 speechtext.firsttime = ¡Bienvenido al Calendario de la UBU! Esta skill esta conectada con UbuVirtual y te permite saber los próximos eventos de tu calendario de la UBU. Si quieres saber si tienes eventos en los próximos días, simplemente di calendario.
+speechtext.moodletokeninvalid = <say-as interpret-as="interjection">mmh</say-as>, parece que no puedo conectar con UBUVirtual. Por favor, desactiva esta skill en tu Alexa app y vuelve a activarla para realizar de nuevo la conexión con tu cuenta de UBUVirtual. ¡Gracias!

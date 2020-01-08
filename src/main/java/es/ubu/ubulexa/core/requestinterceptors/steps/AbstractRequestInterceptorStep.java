@@ -2,6 +2,7 @@ package es.ubu.ubulexa.core.requestinterceptors.steps;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import es.ubu.ubulexa.core.tools.AppConfig;
+import es.ubu.ubulexa.core.tools.jwtclaimextractors.MoodleTokenJwtClaimExtractor;
 import es.ubu.ubulexa.core.tools.jwtclaimextractors.UserIdJwtClaimExtractor;
 import es.ubu.ubulexa.core.tools.jwtclaimextractors.UsernameJwtClaimExtractor;
 import jodd.petite.meta.PetiteBean;
@@ -12,7 +13,14 @@ public abstract class AbstractRequestInterceptorStep implements RequestIntercept
 
   private UserIdJwtClaimExtractor userIdJwtClaimExtractor;
   private UsernameJwtClaimExtractor usernameJwtClaimExtractor;
+  private MoodleTokenJwtClaimExtractor moodleTokenJwtClaimExtractor;
   private AppConfig appConfig;
+
+  @PetiteInject
+  public void setMoodleTokenJwtClaimExtractor(
+      MoodleTokenJwtClaimExtractor moodleTokenJwtClaimExtractor) {
+    this.moodleTokenJwtClaimExtractor = moodleTokenJwtClaimExtractor;
+  }
 
   @PetiteInject
   public void setAppConfig(AppConfig appConfig) {
@@ -31,6 +39,9 @@ public abstract class AbstractRequestInterceptorStep implements RequestIntercept
     this.userIdJwtClaimExtractor = userIdJwtClaimExtractor;
   }
 
+  @Override
+  public abstract void run(HandlerInput handlerInput);
+
   public AppConfig appConfig() {
     return appConfig;
   }
@@ -43,6 +54,7 @@ public abstract class AbstractRequestInterceptorStep implements RequestIntercept
     return usernameJwtClaimExtractor.extract(handlerInput);
   }
 
-  @Override
-  public abstract void run(HandlerInput handlerInput);
+  public String extractMoodleToken(HandlerInput handlerInput) {
+    return moodleTokenJwtClaimExtractor.extract(handlerInput);
+  }
 }

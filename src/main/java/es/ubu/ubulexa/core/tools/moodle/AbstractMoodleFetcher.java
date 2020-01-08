@@ -28,15 +28,15 @@ public abstract class AbstractMoodleFetcher {
     this.moodleHttpClient = moodleHttpClient;
   }
 
-  public MoodleHttpClient moodleHttpClient() {
+  protected MoodleHttpClient moodleHttpClient() {
     return moodleHttpClient;
   }
 
-  public JsonUtils jsonUtils() {
+  protected JsonUtils jsonUtils() {
     return jsonUtils;
   }
 
-  public AppConfig appConfig() {
+  protected AppConfig appConfig() {
     return appConfig;
   }
 }

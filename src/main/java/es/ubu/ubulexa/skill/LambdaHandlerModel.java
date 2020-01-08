@@ -1,25 +1,22 @@
 package es.ubu.ubulexa.skill;
 
 import com.amazon.ask.Skill;
+import com.amazon.ask.model.ResponseEnvelope;
 import com.amazon.ask.request.impl.BaseSkillRequest;
 import com.amazon.ask.response.SkillResponse;
 import es.ubu.ubulexa.core.tools.s3dumpers.SkillRequestS3Dumper;
 import es.ubu.ubulexa.core.tools.s3dumpers.SkillResponseS3Dumper;
+import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import es.ubu.ubulexa.core.utils.IOUtils;
 import es.ubu.ubulexa.core.utils.UuidUtils;
 import es.ubu.ubulexa.skill.config.SkillBuilder;
 import java.io.InputStream;
 import java.io.OutputStream;
-import jodd.exception.ExceptionUtil;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class LambdaHandlerModel {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(LambdaHandlerModel.class);
 
   private UuidUtils uuidUtils;
   private SkillBuilder skillBuilder;
@@ -63,14 +60,14 @@ public class LambdaHandlerModel {
       skillRequestS3Dumper.dump(uuid, inputBytes);
 
       Skill skill = skillBuilder.build();
-      SkillResponse response = skill.execute(new BaseSkillRequest(inputBytes));
+      SkillResponse<ResponseEnvelope> response = skill.execute(new BaseSkillRequest(inputBytes));
 
       if (null != response && response.isPresent()) {
         skillResponseS3Dumper.dump(uuid, response.getRawResponse());
         ioUtils.write(response.getRawResponse(), outputStream);
       }
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtil.exceptionStackTraceToString(e));
+      ExceptionUtils.log(e);
     }
   }
 }

@@ -2,15 +2,10 @@ package es.ubu.ubulexa.core.tools;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import es.ubu.ubulexa.core.Constants;
-import es.ubu.ubulexa.core.matchers.intents.AbstractIntentMatcher;
 import jodd.petite.meta.PetiteBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @PetiteBean
 public class UserLocaleResolver {
-
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractIntentMatcher.class);
 
   public String resolve(HandlerInput handlerInput) {
     return Constants.ES_ES_LOCALE_CODE;
