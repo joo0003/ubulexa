@@ -53,9 +53,16 @@ public class Constants {
   public static final String GOODBYE_SPEECH_TEXT_KEY = "speechtext.goodbye";
   public static final String HELP_SPEECH_TEXT_KEY = "speechtext.help";
   public static final String FALLBACK_SPEECH_TEXT_KEY = "speechtext.fallback";
-  public static final String CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY = "speechtext.calendar.noevents";
   public static final String FIRST_TIME_SPEECH_TEXT_KEY = "speechtext.firsttime";
   public static final String MOODLE_TOKEN_INVALID_SPEECH_TEXT_KEY = "speechtext.moodletokeninvalid";
+  public static final String CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY = "speechtext.calendar.noevents";
+  public static final String CALENDAR_EVENTS_INTRO_SPEECH_TEXT_KEY = "speechtext.calendar.events.intro";
+  public static final String CALENDAR_EVENTS_TODAY_SPEECH_TEXT_KEY = "speechtext.calendar.events.today";
+  public static final String CALENDAR_EVENTS_TOMORROW_SPEECH_TEXT_KEY = "speechtext.calendar.events.tomorrow";
+  public static final String CALENDAR_EVENTS_ANY_DAY_SPEECH_TEXT_KEY = "speechtext.calendar.events.anyday";
+  public static final String CALENDAR_EVENTS_LAST_DAY_SPEECH_TEXT_KEY = "speechtext.calendar.events.lastday";
+
+  public static final String PREFIX_DAYS_SPEECH_TEXT_KEY = "speechtext.days.";
 
   public static final String FIRST_TIME_SESSION_ATTR_KEY = "firstTime";
   public static final String MOODLE_TOKEN_INVALID_SESSION_ATTR_KEY = "moodleTokenInvalid";

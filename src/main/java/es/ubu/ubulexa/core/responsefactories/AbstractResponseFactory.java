@@ -2,11 +2,12 @@ package es.ubu.ubulexa.core.responsefactories;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.response.ResponseBuilder;
-import es.ubu.ubulexa.core.tools.AppConfig;
 import es.ubu.ubulexa.core.tools.DictionaryPropsResolver;
 import es.ubu.ubulexa.core.tools.VoiceTransformerResolver;
 import es.ubu.ubulexa.core.tools.voicetransformers.VoiceTransformer;
 import es.ubu.ubulexa.core.utils.HandlerInputUtils;
+import es.ubu.ubulexa.core.utils.time.InstantUtils;
+import es.ubu.ubulexa.core.utils.time.LocalDateUtils;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import jodd.props.Props;
@@ -15,9 +16,20 @@ import jodd.props.Props;
 public abstract class AbstractResponseFactory implements ResponseFactory {
 
   private DictionaryPropsResolver dictionaryPropsResolver;
-  private AppConfig appConfig;
   private VoiceTransformerResolver voiceTransformerResolver;
   private HandlerInputUtils handlerInputUtils;
+  private InstantUtils instantUtils;
+  private LocalDateUtils localDateUtils;
+
+  @PetiteInject
+  public void setInstantUtils(InstantUtils instantUtils) {
+    this.instantUtils = instantUtils;
+  }
+
+  @PetiteInject
+  public void setLocalDateUtils(LocalDateUtils localDateUtils) {
+    this.localDateUtils = localDateUtils;
+  }
 
   @PetiteInject
   public void setHandlerInputUtils(HandlerInputUtils handlerInputUtils) {
@@ -31,14 +43,17 @@ public abstract class AbstractResponseFactory implements ResponseFactory {
   }
 
   @PetiteInject
-  public void setAppConfig(AppConfig appConfig) {
-    this.appConfig = appConfig;
-  }
-
-  @PetiteInject
   public void setDictionaryPropsResolver(
       DictionaryPropsResolver dictionaryPropsResolver) {
     this.dictionaryPropsResolver = dictionaryPropsResolver;
+  }
+
+  protected LocalDateUtils localDateUtils() {
+    return localDateUtils;
+  }
+
+  protected InstantUtils instantUtils() {
+    return instantUtils;
   }
 
   protected Props resolveDictionary(HandlerInput handlerInput) {

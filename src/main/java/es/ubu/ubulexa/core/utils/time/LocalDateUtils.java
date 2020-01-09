@@ -16,6 +16,10 @@ public class LocalDateUtils {
     this.localDateTimeUtils = localDateTimeUtils;
   }
 
+  public boolean isToday(LocalDate ld1, LocalDate ld2) {
+    return null != ld1 && null != ld2 && ld1.isEqual(ld2);
+  }
+
   public LocalDate from(Instant instant, ZoneId zoneId) {
     return localDateTimeUtils.from(instant, zoneId).toLocalDate();
   }

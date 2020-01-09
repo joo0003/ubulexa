@@ -35,7 +35,13 @@ public class CalendarEventNextWeekFilter extends AbstractCalendarEventFilter {
 
     LocalDate eventLocalDate = localDateUtils().parse(event.getEventDate());
 
-    return !eventLocalDate.isBefore(today);
+    if (eventLocalDate.isBefore(today)) {
+      return false;
+    }
+
+    LocalDate nextWeek = today.plusWeeks(1);
+
+    return eventLocalDate.isBefore(nextWeek);
   }
 
   private boolean canFilter(List<CalendarEvent> events) {

@@ -6,18 +6,54 @@ import com.amazon.ask.response.ResponseBuilder;
 import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.pojos.CalendarEvent;
 import es.ubu.ubulexa.core.tools.CalendarEventResolver;
+import es.ubu.ubulexa.core.tools.CalendarEventSorter;
+import es.ubu.ubulexa.core.tools.speechbuilders.AnyDayEventTemplatedSpeechBuilder;
+import es.ubu.ubulexa.core.tools.speechbuilders.TodayEventTemplatedSpeechBuilder;
+import es.ubu.ubulexa.core.tools.speechbuilders.TomorrowEventTemplatedSpeechBuilder;
 import es.ubu.ubulexa.core.tools.voicetransformers.VoiceTransformer;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import jodd.props.Props;
+import jodd.util.ArraysUtil;
+import jodd.util.StringPool;
+import jodd.util.StringUtil;
 import org.apache.commons.collections4.CollectionUtils;
 
 @PetiteBean
 public class CalendarResponseFactory extends AbstractResponseFactory {
 
   private CalendarEventResolver calendarEventResolver;
+  private CalendarEventSorter calendarEventSorter;
+  private TodayEventTemplatedSpeechBuilder todayEventTemplatedSpeechBuilder;
+  private TomorrowEventTemplatedSpeechBuilder tomorrowEventTemplatedSpeechBuilder;
+  private AnyDayEventTemplatedSpeechBuilder anyDayEventTemplatedSpeechBuilder;
+
+  @PetiteInject
+  public void setAnyDayEventTemplatedSpeechBuilder(
+      AnyDayEventTemplatedSpeechBuilder anyDayEventTemplatedSpeechBuilder) {
+    this.anyDayEventTemplatedSpeechBuilder = anyDayEventTemplatedSpeechBuilder;
+  }
+
+  @PetiteInject
+  public void setTomorrowEventTemplatedSpeechBuilder(
+      TomorrowEventTemplatedSpeechBuilder tomorrowEventTemplatedSpeechBuilder) {
+    this.tomorrowEventTemplatedSpeechBuilder = tomorrowEventTemplatedSpeechBuilder;
+  }
+
+  @PetiteInject
+  public void setTodayEventTemplatedSpeechBuilder(
+      TodayEventTemplatedSpeechBuilder todayEventTemplatedSpeechBuilder) {
+    this.todayEventTemplatedSpeechBuilder = todayEventTemplatedSpeechBuilder;
+  }
+
+  @PetiteInject
+  public void setCalendarEventSorter(CalendarEventSorter calendarEventSorter) {
+    this.calendarEventSorter = calendarEventSorter;
+  }
 
   @PetiteInject
   public void setCalendarEventResolver(
@@ -27,7 +63,6 @@ public class CalendarResponseFactory extends AbstractResponseFactory {
 
   @Override
   public Optional<Response> build(HandlerInput handlerInput) {
-
     List<CalendarEvent> events = calendarEventResolver.resolve(handlerInput);
 
     String speechText = buildSpeechText(handlerInput, events);
@@ -58,7 +93,47 @@ public class CalendarResponseFactory extends AbstractResponseFactory {
     if (CollectionUtils.isEmpty(events)) {
       return dictionary.getValue(Constants.CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY);
     }
-    return dictionary.getValue(Constants.CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY);
-    //return events.get(0).getEventTitle();
+
+    List<CalendarEvent> sortedEvents = calendarEventSorter.sort(events);
+
+    String[] speeches = new String[]{};
+
+    speeches = ArraysUtil.append(
+        speeches,
+        dictionary.getValue(Constants.CALENDAR_EVENTS_INTRO_SPEECH_TEXT_KEY)
+    );
+
+    for (CalendarEvent event : sortedEvents) {
+      speeches = ArraysUtil.append(speeches, buildSpeechText(dictionary, event));
+    }
+
+    return StringUtil.join(speeches, StringPool.SPACE);
+  }
+
+  private String buildSpeechText(Props dictionary, CalendarEvent event) {
+    if (isTodayEvent(event)) {
+      return todayEventTemplatedSpeechBuilder.build(dictionary, event);
+    }
+    if (isTomorrowEvent(event)) {
+      tomorrowEventTemplatedSpeechBuilder.build(dictionary, event);
+    }
+    return anyDayEventTemplatedSpeechBuilder.build(dictionary, event);
+  }
+
+  private LocalDate getToday() {
+    Instant now = instantUtils().now();
+    return localDateUtils().from(now, Constants.CET_ZONE_ID);
+  }
+
+  private boolean isTomorrowEvent(CalendarEvent event) {
+    LocalDate eventLocalDate = localDateUtils().parse(event.getEventDate());
+    LocalDate today = getToday();
+    return today.plusDays(1).isEqual(eventLocalDate);
+  }
+
+  private boolean isTodayEvent(CalendarEvent event) {
+    LocalDate eventLocalDate = localDateUtils().parse(event.getEventDate());
+    LocalDate today = getToday();
+    return today.isEqual(eventLocalDate);
   }
 }
