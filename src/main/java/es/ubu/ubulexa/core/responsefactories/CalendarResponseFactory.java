@@ -115,7 +115,7 @@ public class CalendarResponseFactory extends AbstractResponseFactory {
       return todayEventTemplatedSpeechBuilder.build(dictionary, event);
     }
     if (isTomorrowEvent(event)) {
-      tomorrowEventTemplatedSpeechBuilder.build(dictionary, event);
+      return tomorrowEventTemplatedSpeechBuilder.build(dictionary, event);
     }
     return anyDayEventTemplatedSpeechBuilder.build(dictionary, event);
   }
@@ -127,8 +127,8 @@ public class CalendarResponseFactory extends AbstractResponseFactory {
 
   private boolean isTomorrowEvent(CalendarEvent event) {
     LocalDate eventLocalDate = localDateUtils().parse(event.getEventDate());
-    LocalDate today = getToday();
-    return today.plusDays(1).isEqual(eventLocalDate);
+    LocalDate tomorrow = getToday().plusDays(1);
+    return tomorrow.isEqual(eventLocalDate);
   }
 
   private boolean isTodayEvent(CalendarEvent event) {
