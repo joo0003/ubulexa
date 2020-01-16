@@ -1,15 +1,17 @@
 speechtext.goodbye = Adiós.
 speechtext.help = Si quieres saber si tienes eventos en los próximos días, simplemente di calendario.
 speechtext.fallback = Lo siento. No he entendido lo que me has dicho.
-speechtext.firsttime = ¡Bienvenido al Calendario de la UBU! Esta skill esta conectada con UbuVirtual y te permite saber los próximos eventos de tu calendario de la UBU. Si quieres saber si tienes eventos en los próximos días, simplemente di calendario.
+speechtext.firsttime = ¡Bienvenido al Calendario de la UBU! Esta skill esta conectada con UbuVirtual y te permite saber los próximos eventos de tu calendario de la UBU. Recuerda que esta skill es un proyecto piloto y puede dar resultados incorrectos. Si quieres saber si tienes eventos en los próximos días, simplemente di calendario.
 speechtext.moodletokeninvalid = <say-as interpret-as="interjection">mmh</say-as>, parece que no puedo conectar con UBUVirtual. Por favor, desactiva esta skill en tu Alexa app y vuelve a activarla para realizar de nuevo la conexión con tu cuenta de UBUVirtual. ¡Gracias!
 
-speechtext.calendar.noevents = No tienes ningún evento en tu calendario para los próximos días.
+speechtext.calendar.noevents = No parece que tengas ningún evento en tu calendario para los próximos días.
 speechtext.calendar.events.intro = Tus eventos para los próximos días:
 speechtext.calendar.events.today = Hoy tienes ${0}.
 speechtext.calendar.events.tomorrow = Mañana tienes ${0}.
 speechtext.calendar.events.anyday = El ${0} tienes ${1}.
 speechtext.calendar.events.lastday = Y ${0}
+
+speechtext.disclaimer = <amazon:effect name="whispered">Recuerda revisar tu calendario en UBUVirtual para estar completamente seguro.</amazon:effect>
 
 speechtext.days.1 = Lunes
 speechtext.days.2 = Martes

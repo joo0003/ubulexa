@@ -90,10 +90,21 @@ public class CalendarResponseFactory extends AbstractResponseFactory {
   }
 
   private String buildSpeechText(Props dictionary, List<CalendarEvent> events) {
-    if (CollectionUtils.isEmpty(events)) {
-      return dictionary.getValue(Constants.CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY);
-    }
+    String speech = (CollectionUtils.isEmpty(events)) ?
+        buildNoEventsSpeechText(dictionary) :
+        buildYesEventsSpeechText(dictionary, events);
 
+    speech += StringPool.SPACE;
+    speech += dictionary.getValue(Constants.DISCLAIMER_SPEECH_TEXT_KEY);
+
+    return speech;
+  }
+
+  private String buildNoEventsSpeechText(Props dictionary) {
+    return dictionary.getValue(Constants.CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY);
+  }
+
+  private String buildYesEventsSpeechText(Props dictionary, List<CalendarEvent> events) {
     List<CalendarEvent> sortedEvents = calendarEventSorter.sort(events);
 
     String[] speeches = new String[]{};

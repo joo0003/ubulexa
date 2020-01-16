@@ -54,6 +54,7 @@ public class Constants {
   public static final String HELP_SPEECH_TEXT_KEY = "speechtext.help";
   public static final String FALLBACK_SPEECH_TEXT_KEY = "speechtext.fallback";
   public static final String FIRST_TIME_SPEECH_TEXT_KEY = "speechtext.firsttime";
+  public static final String DISCLAIMER_SPEECH_TEXT_KEY = "speechtext.disclaimer";
   public static final String MOODLE_TOKEN_INVALID_SPEECH_TEXT_KEY = "speechtext.moodletokeninvalid";
   public static final String CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY = "speechtext.calendar.noevents";
   public static final String CALENDAR_EVENTS_INTRO_SPEECH_TEXT_KEY = "speechtext.calendar.events.intro";
