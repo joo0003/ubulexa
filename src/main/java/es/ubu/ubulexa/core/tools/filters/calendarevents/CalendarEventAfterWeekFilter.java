@@ -10,7 +10,7 @@ import jodd.petite.meta.PetiteBean;
 import org.apache.commons.collections4.CollectionUtils;
 
 @PetiteBean
-public class CalendarEventNextWeekFilter extends AbstractCalendarEventFilter {
+public class CalendarEventAfterWeekFilter extends AbstractCalendarEventFilter {
 
   public List<CalendarEvent> filter(List<CalendarEvent> events) {
     List<CalendarEvent> filteredList = new ArrayList<>();
@@ -18,7 +18,8 @@ public class CalendarEventNextWeekFilter extends AbstractCalendarEventFilter {
     if (canFilter(events)) {
 
       Instant now = instantUtils().now();
-      LocalDate start = localDateUtils().from(now, Constants.CET_ZONE_ID);
+      LocalDate today = localDateUtils().from(now, Constants.CET_ZONE_ID);
+      LocalDate start = today.plusWeeks(1);
 
       for (CalendarEvent event : events) {
         if (shouldBeIncluded(event, start)) {
@@ -31,7 +32,6 @@ public class CalendarEventNextWeekFilter extends AbstractCalendarEventFilter {
   }
 
   private boolean shouldBeIncluded(CalendarEvent event, LocalDate start) {
-
     LocalDate eventLocalDate = localDateUtils().parse(event.getEventDate());
 
     if (eventLocalDate.isBefore(start)) {

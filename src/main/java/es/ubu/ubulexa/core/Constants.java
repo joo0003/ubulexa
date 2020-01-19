@@ -62,8 +62,10 @@ public class Constants {
   public static final String CALENDAR_EVENTS_TOMORROW_SPEECH_TEXT_KEY = "speechtext.calendar.events.tomorrow";
   public static final String CALENDAR_EVENTS_ANY_DAY_SPEECH_TEXT_KEY = "speechtext.calendar.events.anyday";
   public static final String CALENDAR_EVENTS_LAST_DAY_SPEECH_TEXT_KEY = "speechtext.calendar.events.lastday";
+  public static final String CALENDAR_EVENTS_ANY_DAY_WITH_DATE_SPEECH_TEXT_KEY = "speechtext.calendar.events.anydaywithdate";
 
   public static final String PREFIX_DAYS_SPEECH_TEXT_KEY = "speechtext.days.";
+  public static final String PREFIX_MONTHS_SPEECH_TEXT_KEY = "speechtext.months.";
 
   public static final String FIRST_TIME_SESSION_ATTR_KEY = "firstTime";
   public static final String MOODLE_TOKEN_INVALID_SESSION_ATTR_KEY = "moodleTokenInvalid";

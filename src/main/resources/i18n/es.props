@@ -10,8 +10,9 @@ speechtext.calendar.events.today = Hoy tienes ${0}.
 speechtext.calendar.events.tomorrow = Mañana tienes ${0}.
 speechtext.calendar.events.anyday = El ${0} tienes ${1}.
 speechtext.calendar.events.lastday = Y ${0}
+speechtext.calendar.events.anydaywithdate = El ${0}, ${1}, tienes ${2}.
 
-speechtext.disclaimer = <amazon:effect name="whispered">Recuerda revisar tu calendario en UBUVirtual para estar completamente seguro.</amazon:effect>
+speechtext.disclaimer = Recuerda revisar tu calendario en UBUVirtual para estar completamente seguro.
 
 speechtext.days.1 = Lunes
 speechtext.days.2 = Martes
@@ -20,3 +21,17 @@ speechtext.days.4 = Jueves
 speechtext.days.5 = Viernes
 speechtext.days.6 = Sábado
 speechtext.days.7 = Domingo
+
+speechtext.months.1 = Enero
+speechtext.months.2 = Febrero
+speechtext.months.3 = Marzo
+speechtext.months.4 = Abril
+speechtext.months.5 = Mayo
+speechtext.months.6 = Junio
+speechtext.months.7 = Julio
+speechtext.months.8 = Agosto
+speechtext.months.9 = Septiembre
+speechtext.months.10 = Octubre
+speechtext.months.11 = Noviembre
+speechtext.months.12 = Diciembre
+
