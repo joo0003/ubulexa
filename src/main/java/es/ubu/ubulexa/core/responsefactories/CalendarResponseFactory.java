@@ -6,7 +6,7 @@ import com.amazon.ask.response.ResponseBuilder;
 import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.pojos.CalendarEvent;
 import es.ubu.ubulexa.core.pojos.CalendarEventResolverResult;
-import es.ubu.ubulexa.core.tools.CalendarEventResolver;
+import es.ubu.ubulexa.core.tools.resolvers.CalendarEventResolver;
 import es.ubu.ubulexa.core.tools.CalendarEventSorter;
 import es.ubu.ubulexa.core.tools.speechbuilders.AnyDayEventTemplatedSpeechBuilder;
 import es.ubu.ubulexa.core.tools.speechbuilders.AnyDayEventWithDateTemplatedSpeechBuilder;

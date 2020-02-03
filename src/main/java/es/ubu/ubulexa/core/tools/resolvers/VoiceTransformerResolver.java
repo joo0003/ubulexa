@@ -1,4 +1,4 @@
-package es.ubu.ubulexa.core.tools;
+package es.ubu.ubulexa.core.tools.resolvers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import es.ubu.ubulexa.core.daos.FirstTimeUserEventDao;

@@ -4,6 +4,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import es.ubu.ubulexa.core.responsefactories.ResponseFactory;
+import es.ubu.ubulexa.core.tools.resolvers.ResponseFactoryResolver;
 import java.util.Optional;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;

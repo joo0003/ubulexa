@@ -19,7 +19,7 @@ public class Constants {
   public static final String SKILL_ID_KEY = "skillId";
 
   public static final String CHELO_COURSE_1_ID = "1685";
-  public static final String CHELO_COURSE_2_ID = "";
+  public static final String CHELO_COURSE_2_ID = "notanumber";
   public static final String RAUL_COURSE_1_ID = "";
 
   public static final String FALLBACK_INTENT = "AMAZON.FallbackIntent";

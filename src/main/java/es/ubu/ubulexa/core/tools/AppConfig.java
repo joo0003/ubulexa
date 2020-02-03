@@ -3,6 +3,7 @@ package es.ubu.ubulexa.core.tools;
 import es.ubu.ubulexa.core.Constants;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
+import jodd.util.StringUtil;
 
 @PetiteBean
 public class AppConfig {
@@ -35,14 +36,14 @@ public class AppConfig {
   }
 
   public String cheloCourse1Id() {
-    return Constants.CHELO_COURSE_1_ID;
+    return StringUtil.trimDown(Constants.CHELO_COURSE_1_ID);
   }
 
   public String cheloCourse2Id() {
-    return Constants.CHELO_COURSE_2_ID;
+    return StringUtil.trimDown(Constants.CHELO_COURSE_2_ID);
   }
 
   public String raulCourse1() {
-    return Constants.RAUL_COURSE_1_ID;
+    return StringUtil.trimDown(Constants.RAUL_COURSE_1_ID);
   }
 }

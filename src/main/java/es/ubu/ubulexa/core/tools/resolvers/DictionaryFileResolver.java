@@ -1,4 +1,4 @@
-package es.ubu.ubulexa.core.tools;
+package es.ubu.ubulexa.core.tools.resolvers;
 
 import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.utils.ClassLoaderUtils;

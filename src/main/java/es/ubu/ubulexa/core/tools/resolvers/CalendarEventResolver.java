@@ -1,13 +1,13 @@
-package es.ubu.ubulexa.core.tools;
+package es.ubu.ubulexa.core.tools.resolvers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import es.ubu.ubulexa.core.pojos.CalendarEvent;
 import es.ubu.ubulexa.core.pojos.CalendarEventResolverResult;
+import es.ubu.ubulexa.core.tools.CalendarJsonReader;
 import es.ubu.ubulexa.core.tools.filters.calendarevents.CalendarEventAfterWeekFilter;
+import es.ubu.ubulexa.core.tools.filters.calendarevents.CalendarEventCoursesFilter;
 import es.ubu.ubulexa.core.tools.filters.calendarevents.CalendarEventNextWeekFilter;
 import es.ubu.ubulexa.core.tools.jwtclaimextractors.MoodleTokenJwtClaimExtractor;
-import es.ubu.ubulexa.core.tools.moodle.MoodleUserCalendarEventsFetcher;
-import es.ubu.ubulexa.core.tools.moodle.MoodleUserCoursesFetcher;
 import es.ubu.ubulexa.core.tools.moodle.MoodleUserIdFetcher;
 import java.util.List;
 import java.util.Set;
@@ -21,27 +21,27 @@ public class CalendarEventResolver {
 
   private MoodleTokenJwtClaimExtractor moodleTokenJwtClaimExtractor;
   private MoodleUserIdFetcher moodleUserIdFetcher;
-  private MoodleUserCoursesFetcher moodleUserCoursesFetcher;
   private CalendarEventNextWeekFilter calendarEventNextWeekFilter;
   private CalendarEventAfterWeekFilter calendarEventAfterWeekFilter;
+  private CalendarEventCoursesFilter calendarEventCoursesFilter;
   private CalendarJsonReader calendarJsonReader;
-  private AppConfig appConfig;
+  private CourseResolver courseResolver;
 
   @PetiteInject
-  public void setAppConfig(AppConfig appConfig) {
-    this.appConfig = appConfig;
+  public void setCalendarEventCoursesFilter(
+      CalendarEventCoursesFilter calendarEventCoursesFilter) {
+    this.calendarEventCoursesFilter = calendarEventCoursesFilter;
+  }
+
+  @PetiteInject
+  public void setCourseResolver(CourseResolver courseResolver) {
+    this.courseResolver = courseResolver;
   }
 
   @PetiteInject
   public void setMoodleUserIdFetcher(
       MoodleUserIdFetcher moodleUserIdFetcher) {
     this.moodleUserIdFetcher = moodleUserIdFetcher;
-  }
-
-  @PetiteInject
-  public void setMoodleUserCoursesFetcher(
-      MoodleUserCoursesFetcher moodleUserCoursesFetcher) {
-    this.moodleUserCoursesFetcher = moodleUserCoursesFetcher;
   }
 
   @PetiteInject
@@ -77,31 +77,26 @@ public class CalendarEventResolver {
       return result;
     }
 
-    Set<String> courses = moodleUserCoursesFetcher.fetch(moodleToken, userId);
+    Set<String> courses = courseResolver.resolve(moodleToken, userId);
 
     if (CollectionUtils.isEmpty(courses)) {
       return result;
     }
 
-    if (!courses.contains(appConfig.cheloCourse1Id())) {
-      return result;
-    }
-
-    //List<CalendarEvent> events = moodleUserCalendarEventsFetcher.fetch(moodleToken);
     List<CalendarEvent> events = calendarJsonReader.read();
     if (CollectionUtils.isEmpty(events)) {
       return result;
     }
 
-    //events = calendarEventCourseFilter.filter(events);
-    if (CollectionUtils.isEmpty(events)) {
+    List<CalendarEvent> userEvents = calendarEventCoursesFilter.filter(events, courses);
+    if (CollectionUtils.isEmpty(userEvents)) {
       return result;
     }
 
-    List<CalendarEvent> nextWeekEvents = calendarEventNextWeekFilter.filter(events);
+    List<CalendarEvent> nextWeekEvents = calendarEventNextWeekFilter.filter(userEvents);
     result.setNextWeekEvents(nextWeekEvents);
 
-    List<CalendarEvent> afterNextWeekEvents = calendarEventAfterWeekFilter.filter(events);
+    List<CalendarEvent> afterNextWeekEvents = calendarEventAfterWeekFilter.filter(userEvents);
     result.setAfterNextWeekEvents(afterNextWeekEvents);
 
     return result;

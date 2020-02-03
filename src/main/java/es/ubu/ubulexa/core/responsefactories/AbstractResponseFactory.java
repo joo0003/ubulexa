@@ -2,8 +2,8 @@ package es.ubu.ubulexa.core.responsefactories;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.response.ResponseBuilder;
-import es.ubu.ubulexa.core.tools.DictionaryPropsResolver;
-import es.ubu.ubulexa.core.tools.VoiceTransformerResolver;
+import es.ubu.ubulexa.core.tools.resolvers.DictionaryPropsResolver;
+import es.ubu.ubulexa.core.tools.resolvers.VoiceTransformerResolver;
 import es.ubu.ubulexa.core.tools.voicetransformers.VoiceTransformer;
 import es.ubu.ubulexa.core.utils.HandlerInputUtils;
 import es.ubu.ubulexa.core.utils.time.InstantUtils;

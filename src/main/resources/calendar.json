@@ -2,81 +2,97 @@
   {
     "eventId": "001",
     "eventTitle": "Inicio de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-02-03"
+    "eventDate": "2020-02-03",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "002",
     "eventTitle": "Finalización de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-06-26"
+    "eventDate": "2020-06-26",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "003",
     "eventTitle": "Practicas de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-02-14"
+    "eventDate": "2020-02-14",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "004",
     "eventTitle": "Prácticas de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-02-21"
+    "eventDate": "2020-02-21",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "005",
     "eventTitle": "Prácticas de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-02-28"
+    "eventDate": "2020-02-28",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "006",
     "eventTitle": "Prácticas de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-03-13"
+    "eventDate": "2020-03-13",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "006",
     "eventTitle": "Prácticas de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-03-20"
+    "eventDate": "2020-03-20",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "007",
     "eventTitle": "Prueba de evaluación de tipo test de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-02-26"
+    "eventDate": "2020-02-28",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "008",
     "eventTitle": "Prueba de evaluación de tipo test de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-03-18"
+    "eventDate": "2020-03-20",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "009",
     "eventTitle": "Presentación y exposición de proyecto de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-03-23"
+    "eventDate": "2020-03-23",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "010",
     "eventTitle": "Presentación y exposición de proyecto de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-03-24"
+    "eventDate": "2020-03-24",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "011",
     "eventTitle": "Presentación y exposición de proyecto de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-03-25"
+    "eventDate": "2020-03-25",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "012",
     "eventTitle": "Presentación y exposición de proyecto de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-03-26"
+    "eventDate": "2020-03-26",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "013",
     "eventTitle": "Presentación y exposición de proyecto de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-03-27"
+    "eventDate": "2020-03-27",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "014",
     "eventTitle": "Primera convocatoria para la prueba de evaluación de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-04-17"
+    "eventDate": "2020-04-17",
+    "eventCourseId": "1685"
   },
   {
     "eventId": "015",
     "eventTitle": "Segunda convocatoria para la prueba de evaluación de la asignatura de Estimulación Temprana",
-    "eventDate": "2020-04-27"
+    "eventDate": "2020-04-27",
+    "eventCourseId": "1685"
   }
 ]
