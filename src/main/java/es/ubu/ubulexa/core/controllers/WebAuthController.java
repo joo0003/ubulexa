@@ -5,9 +5,12 @@ import es.ubu.ubulexa.core.tools.AccessTokenCreator;
 import es.ubu.ubulexa.core.tools.ThreefishEncrypter;
 import es.ubu.ubulexa.core.tools.UserIdFactory;
 import es.ubu.ubulexa.core.tools.moodle.MoodleTokenFetcher;
+import es.ubu.ubulexa.core.tools.s3dumpers.TokenExchangeS3Dumper;
 import es.ubu.ubulexa.core.utils.Base64Utils;
 import es.ubu.ubulexa.core.utils.JsonUtils;
 import es.ubu.ubulexa.core.utils.UrlUtils;
+import es.ubu.ubulexa.core.utils.UuidUtils;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import jodd.petite.meta.PetiteBean;
@@ -28,6 +31,19 @@ public class WebAuthController extends AbstractController {
   private JsonUtils jsonUtils;
   private ThreefishEncrypter threefishEncrypter;
   private UserIdFactory userIdFactory;
+  private TokenExchangeS3Dumper tokenExchangeS3Dumper;
+  private UuidUtils uuidUtils;
+
+  @PetiteInject
+  public void setUuidUtils(UuidUtils uuidUtils) {
+    this.uuidUtils = uuidUtils;
+  }
+
+  @PetiteInject
+  public void setTokenExchangeS3Dumper(
+      TokenExchangeS3Dumper tokenExchangeS3Dumper) {
+    this.tokenExchangeS3Dumper = tokenExchangeS3Dumper;
+  }
 
   @PetiteInject
   public void setUserIdFactory(UserIdFactory userIdFactory) {
@@ -126,6 +142,13 @@ public class WebAuthController extends AbstractController {
     map.put("expires_in", seconds);
     map.put("refresh_token", StringUtil.reverse(code));
 
-    return jsonUtils.jsonSerializer().serialize(map);
+    String jsonStr = jsonUtils.jsonSerializer().serialize(map);
+
+    tokenExchangeS3Dumper.dump(
+        uuidUtils.generate(),
+        jsonStr.getBytes(StandardCharsets.UTF_8)
+    );
+
+    return jsonStr;
   }
 }

@@ -17,7 +17,10 @@ public class Constants {
   public static final String MOODLE_HOST_URL_KEY = "moodleHostUrl";
   public static final String JWT_SECRET_KEY = "jwtSecret";
   public static final String SKILL_ID_KEY = "skillId";
-  public static final String MOODLE_COURSE_ID_KEY = "moodleCourseId";
+
+  public static final String CHELO_COURSE_1_ID = "1685";
+  public static final String CHELO_COURSE_2_ID = "";
+  public static final String RAUL_COURSE_1_ID = "";
 
   public static final String FALLBACK_INTENT = "AMAZON.FallbackIntent";
   public static final String CANCEL_INTENT = "AMAZON.CancelIntent";
@@ -47,6 +50,7 @@ public class Constants {
   public static final String SUBFOLDER_FIRST_TIME_USER_EVENTS_NAME = "first_time_user_events";
   public static final String SUBFOLDER_WEB_REQUESTS_NAME = "web_requests";
   public static final String SUBFOLDER_WEB_RESPONSES_NAME = "web_responses";
+  public static final String SUBFOLDER_TOKEN_EXCHANGE_NAME = "token_exchange";
 
   public static final String FAKE_AMAZON_UBU_EMAIL = "amazon123@alu.ubu.es";
 

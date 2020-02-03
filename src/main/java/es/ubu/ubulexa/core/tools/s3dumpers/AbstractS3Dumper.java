@@ -29,7 +29,7 @@ public abstract class AbstractS3Dumper {
     this.clockUtils = clockUtils;
   }
 
-  public void dump(String uuid, String keyPrefix, byte[] bytes) {
+  protected void dump(String uuid, String keyPrefix, byte[] bytes) {
     try {
       String filename = clockUtils.clock().millis() + "_" + uuid;
       String key = keyPrefix + "/" + filename;

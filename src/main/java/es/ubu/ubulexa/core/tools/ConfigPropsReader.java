@@ -3,7 +3,6 @@ package es.ubu.ubulexa.core.tools;
 import static es.ubu.ubulexa.core.Constants.BUCKET_NAME_KEY;
 import static es.ubu.ubulexa.core.Constants.CONFIG_PROPS_FILENAME;
 import static es.ubu.ubulexa.core.Constants.JWT_SECRET_KEY;
-import static es.ubu.ubulexa.core.Constants.MOODLE_COURSE_ID_KEY;
 import static es.ubu.ubulexa.core.Constants.MOODLE_HOST_URL_KEY;
 import static es.ubu.ubulexa.core.Constants.SKILL_ID_KEY;
 import static es.ubu.ubulexa.core.Constants.THREEFISH_SECRET_KEY;
@@ -46,10 +45,6 @@ public class ConfigPropsReader {
       ExceptionUtils.log(e);
       return null;
     }
-  }
-
-  public String moodleCourseId() {
-    return read().getValueOrDefault(MOODLE_COURSE_ID_KEY, StringPool.EMPTY);
   }
 
   public String bucketName() {

@@ -4,7 +4,6 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import es.ubu.ubulexa.core.pojos.CalendarEvent;
 import es.ubu.ubulexa.core.pojos.CalendarEventResolverResult;
 import es.ubu.ubulexa.core.tools.filters.calendarevents.CalendarEventAfterWeekFilter;
-import es.ubu.ubulexa.core.tools.filters.calendarevents.CalendarEventCourseFilter;
 import es.ubu.ubulexa.core.tools.filters.calendarevents.CalendarEventNextWeekFilter;
 import es.ubu.ubulexa.core.tools.jwtclaimextractors.MoodleTokenJwtClaimExtractor;
 import es.ubu.ubulexa.core.tools.moodle.MoodleUserCalendarEventsFetcher;
@@ -21,10 +20,8 @@ import org.apache.commons.collections4.CollectionUtils;
 public class CalendarEventResolver {
 
   private MoodleTokenJwtClaimExtractor moodleTokenJwtClaimExtractor;
-  private MoodleUserCalendarEventsFetcher moodleUserCalendarEventsFetcher;
   private MoodleUserIdFetcher moodleUserIdFetcher;
   private MoodleUserCoursesFetcher moodleUserCoursesFetcher;
-  private CalendarEventCourseFilter calendarEventCourseFilter;
   private CalendarEventNextWeekFilter calendarEventNextWeekFilter;
   private CalendarEventAfterWeekFilter calendarEventAfterWeekFilter;
   private CalendarJsonReader calendarJsonReader;
@@ -65,18 +62,6 @@ public class CalendarEventResolver {
   }
 
   @PetiteInject
-  public void setCalendarEventCourseFilter(
-      CalendarEventCourseFilter calendarEventCourseFilter) {
-    this.calendarEventCourseFilter = calendarEventCourseFilter;
-  }
-
-  @PetiteInject
-  public void setMoodleUserCalendarEventsFetcher(
-      MoodleUserCalendarEventsFetcher moodleUserCalendarEventsFetcher) {
-    this.moodleUserCalendarEventsFetcher = moodleUserCalendarEventsFetcher;
-  }
-
-  @PetiteInject
   public void setMoodleTokenJwtClaimExtractor(
       MoodleTokenJwtClaimExtractor moodleTokenJwtClaimExtractor) {
     this.moodleTokenJwtClaimExtractor = moodleTokenJwtClaimExtractor;
@@ -98,7 +83,7 @@ public class CalendarEventResolver {
       return result;
     }
 
-    if (!courses.contains(appConfig.moodleCourseId())) {
+    if (!courses.contains(appConfig.cheloCourse1Id())) {
       return result;
     }
 
