@@ -6,8 +6,8 @@ import com.amazon.ask.response.ResponseBuilder;
 import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.pojos.CalendarEvent;
 import es.ubu.ubulexa.core.pojos.CalendarEventResolverResult;
-import es.ubu.ubulexa.core.tools.resolvers.CalendarEventResolver;
 import es.ubu.ubulexa.core.tools.CalendarEventSorter;
+import es.ubu.ubulexa.core.tools.resolvers.CalendarEventResolver;
 import es.ubu.ubulexa.core.tools.speechbuilders.AnyDayEventTemplatedSpeechBuilder;
 import es.ubu.ubulexa.core.tools.speechbuilders.AnyDayEventWithDateTemplatedSpeechBuilder;
 import es.ubu.ubulexa.core.tools.speechbuilders.TodayEventTemplatedSpeechBuilder;
@@ -104,15 +104,30 @@ public class CalendarResponseFactory extends AbstractResponseFactory {
   ) {
     String[] speeches = new String[]{};
 
-    speeches = ArraysUtil.append(
-        speeches,
-        buildNextWeekEventsSpeech(dictionary, result.getNextWeekEvents())
+    String nextWeekEventsSpeech = buildNextWeekEventsSpeech(
+        dictionary,
+        result.getNextWeekEvents()
     );
 
-    speeches = ArraysUtil.append(
-        speeches,
-        buildAfterNextWeekEventsSpeech(dictionary, result.getAfterNextWeekEvents())
+    String afterNextWeekEventsSpeech = buildAfterNextWeekEventsSpeech(
+        dictionary,
+        result.getAfterNextWeekEvents()
     );
+
+    if (StringUtil.isAllBlank(nextWeekEventsSpeech, afterNextWeekEventsSpeech)) {
+      speeches = ArraysUtil.append(
+          speeches,
+          dictionary.getValue(Constants.CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY)
+      );
+    } else {
+      speeches = ArraysUtil.append(
+          speeches,
+          dictionary.getValue(Constants.CALENDAR_EVENTS_INTRO_SPEECH_TEXT_KEY)
+      );
+
+      speeches = ArraysUtil.append(speeches, nextWeekEventsSpeech);
+      speeches = ArraysUtil.append(speeches, afterNextWeekEventsSpeech);
+    }
 
     speeches = ArraysUtil.append(
         speeches,
@@ -146,24 +161,13 @@ public class CalendarResponseFactory extends AbstractResponseFactory {
       Props dictionary,
       List<CalendarEvent> events
   ) {
-    return (CollectionUtils.isEmpty(events)) ?
-        buildNoNextWeekEventsSpeechText(dictionary) :
-        buildYesNextWeekEventsSpeechText(dictionary, events);
-  }
+    if (CollectionUtils.isEmpty(events)) {
+      return StringPool.EMPTY;
+    }
 
-  private String buildNoNextWeekEventsSpeechText(Props dictionary) {
-    return dictionary.getValue(Constants.CALENDAR_NO_EVENTS_SPEECH_TEXT_KEY);
-  }
-
-  private String buildYesNextWeekEventsSpeechText(Props dictionary, List<CalendarEvent> events) {
     List<CalendarEvent> sortedEvents = calendarEventSorter.sort(events);
 
     String[] speeches = new String[]{};
-
-    speeches = ArraysUtil.append(
-        speeches,
-        dictionary.getValue(Constants.CALENDAR_EVENTS_INTRO_SPEECH_TEXT_KEY)
-    );
 
     for (CalendarEvent event : sortedEvents) {
       speeches = ArraysUtil.append(speeches, buildSpeechText(dictionary, event));
