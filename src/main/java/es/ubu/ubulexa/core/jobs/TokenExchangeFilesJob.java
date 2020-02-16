@@ -11,7 +11,6 @@ import es.ubu.ubulexa.core.tools.ThreefishDecrypter;
 import es.ubu.ubulexa.core.utils.AmazonS3Utils;
 import es.ubu.ubulexa.core.utils.Base64Utils;
 import es.ubu.ubulexa.core.utils.JsonUtils;
-import es.ubu.ubulexa.core.utils.LoggerUtils;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -95,7 +94,6 @@ public class TokenExchangeFilesJob {
       csv += StringPool.NEWLINE;
     }
 
-    LoggerUtils.info(csv);
     amazonS3Utils.putObject(
         appConfig.bucketName(),
         Constants.SUBFOLDER_CSVS_NAME + "/token_exchange.csv",
