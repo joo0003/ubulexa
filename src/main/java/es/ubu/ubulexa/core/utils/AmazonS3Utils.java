@@ -1,6 +1,7 @@
 package es.ubu.ubulexa.core.utils;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ListObjectsV2Request;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import java.io.IOException;
 import jodd.petite.meta.PetiteBean;
@@ -36,5 +37,17 @@ public class AmazonS3Utils {
 
   public ListObjectsV2Result listObjectsV2(String bucket, String prefix) {
     return amazonS3.listObjectsV2(bucket, prefix);
+  }
+
+  public ListObjectsV2Result listObjectsV2(ListObjectsV2Request listObjectsV2Request) {
+    return amazonS3.listObjectsV2(listObjectsV2Request);
+  }
+
+  public ListObjectsV2Request listObjectsV2Request(String bucket, String prefix) {
+    return new ListObjectsV2Request().withBucketName(bucket).withPrefix(prefix);
+  }
+
+  public String getObjectAsString(String bucketName, String key) {
+    return amazonS3.getObjectAsString(bucketName, key);
   }
 }

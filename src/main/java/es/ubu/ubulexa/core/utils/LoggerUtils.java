@@ -12,6 +12,6 @@ public class LoggerUtils {
   }
 
   public static void info(String str) {
-    LOGGER.error(str);
+    LOGGER.info(str);
   }
 }
