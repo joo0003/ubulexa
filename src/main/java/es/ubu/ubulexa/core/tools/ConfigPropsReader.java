@@ -12,6 +12,7 @@ import es.ubu.ubulexa.core.utils.ExceptionUtils;
 import es.ubu.ubulexa.core.utils.PropsUtils;
 import java.io.InputStream;
 import jodd.petite.meta.PetiteBean;
+import jodd.petite.meta.PetiteInitMethod;
 import jodd.petite.meta.PetiteInject;
 import jodd.props.Props;
 import jodd.util.StringPool;
@@ -34,7 +35,8 @@ public class ConfigPropsReader {
     this.classLoaderUtils = classLoaderUtils;
   }
 
-  private Props read() {
+  @PetiteInitMethod
+  public Props init() {
     try {
       if (null == PROPS) {
         InputStream is = classLoaderUtils.getResourceAsStream(CONFIG_PROPS_FILENAME);
@@ -45,6 +47,10 @@ public class ConfigPropsReader {
       ExceptionUtils.log(e);
       return null;
     }
+  }
+
+  private Props read() {
+    return PROPS;
   }
 
   public String bucketName() {

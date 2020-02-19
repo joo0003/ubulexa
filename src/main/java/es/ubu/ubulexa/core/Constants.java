@@ -74,4 +74,9 @@ public class Constants {
 
   public static final String FIRST_TIME_SESSION_ATTR_KEY = "firstTime";
   public static final String MOODLE_TOKEN_INVALID_SESSION_ATTR_KEY = "moodleTokenInvalid";
+
+  public static final String TOKEN_EXCHANGE_CSV_FILENAME = SUBFOLDER_TOKEN_EXCHANGE_NAME + ".csv";
+  public static final String FIRST_TIME_USER_EVENTS_CSV_FILENAME =
+      SUBFOLDER_FIRST_TIME_USER_EVENTS_NAME + ".csv";
+  public static final String DATA_CSV_FILENAME = "data.csv";
 }
