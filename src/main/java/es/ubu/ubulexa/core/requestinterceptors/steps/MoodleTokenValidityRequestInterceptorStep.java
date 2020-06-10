@@ -5,7 +5,6 @@ import es.ubu.ubulexa.core.Constants;
 import es.ubu.ubulexa.core.tools.UserIdFactory;
 import es.ubu.ubulexa.core.tools.moodle.MoodleUserIdFetcher;
 import es.ubu.ubulexa.core.tools.sessionattributes.MoodleTokenInvalidSessionAttributeSetter;
-import es.ubu.ubulexa.core.utils.Base64Utils;
 import jodd.petite.meta.PetiteBean;
 import jodd.petite.meta.PetiteInject;
 import jodd.util.StringUtil;
@@ -15,17 +14,11 @@ public class MoodleTokenValidityRequestInterceptorStep extends AbstractRequestIn
 
   private MoodleUserIdFetcher moodleUserIdFetcher;
   private MoodleTokenInvalidSessionAttributeSetter moodleTokenInvalidSessionAttributeSetter;
-  private Base64Utils base64Utils;
   private UserIdFactory userIdFactory;
 
   @PetiteInject
   public void setUserIdFactory(UserIdFactory userIdFactory) {
     this.userIdFactory = userIdFactory;
-  }
-
-  @PetiteInject
-  public void setBase64Utils(Base64Utils base64Utils) {
-    this.base64Utils = base64Utils;
   }
 
   @PetiteInject
